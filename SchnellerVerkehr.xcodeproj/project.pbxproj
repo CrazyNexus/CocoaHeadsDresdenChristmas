@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0A068FED1856633B0002EF22 /* CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FEC1856633B0002EF22 /* CHDStop.m */; };
+		0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */; };
+		0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF3185685DA0002EF22 /* CHDStopCell.m */; };
 		0AA66FE41856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
 		0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE51856533E003D300C /* CoreGraphics.framework */; };
 		0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE71856533E003D300C /* UIKit.framework */; };
@@ -40,6 +42,10 @@
 /* Begin PBXFileReference section */
 		0A068FEB1856633B0002EF22 /* CHDStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStop.h; path = Model/CHDStop.h; sourceTree = "<group>"; };
 		0A068FEC1856633B0002EF22 /* CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStop.m; path = Model/CHDStop.m; sourceTree = "<group>"; };
+		0A068FEF185676CC0002EF22 /* CHDDatasourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDDatasourceManager.h; path = Helper/CHDDatasourceManager.h; sourceTree = "<group>"; };
+		0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDDatasourceManager.m; path = Helper/CHDDatasourceManager.m; sourceTree = "<group>"; };
+		0A068FF2185685DA0002EF22 /* CHDStopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStopCell.h; path = View/CHDStopCell.h; sourceTree = "<group>"; };
+		0A068FF3185685DA0002EF22 /* CHDStopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStopCell.m; path = View/CHDStopCell.m; sourceTree = "<group>"; };
 		0AA66FE01856533E003D300C /* SchnellerVerkehr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchnellerVerkehr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA66FE31856533E003D300C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0AA66FE51856533E003D300C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -111,6 +117,8 @@
 		0A068FE91856579F0002EF22 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0A068FF2185685DA0002EF22 /* CHDStopCell.h */,
+				0A068FF3185685DA0002EF22 /* CHDStopCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -118,6 +126,8 @@
 		0A068FEA1856602E0002EF22 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0A068FEF185676CC0002EF22 /* CHDDatasourceManager.h */,
+				0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -333,9 +343,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */,
 				B84A18361856700800A984D0 /* main.m in Sources */,
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
+				0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);

@@ -8,11 +8,15 @@
 
 #import "CHDSearchViewController.h"
 #import "CHDStop.h"
+#import "CHDDatasourceManager.h"
+#import "CHDStopCell.h"
+
 
 @interface CHDSearchViewController ()
 
-@property (nonatomic, strong) NSArray *menueItems;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+
+@property (nonatomic, strong) CHDDatasourceManager *datasourceManager;
 
 @end
 
@@ -23,30 +27,21 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //_menueItems = [[NSMutableArray alloc] initWithObjects:@"Detailsuche", @"Kontakte", @"Favoriten", nil];
-
+    
+    self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
+    
+    [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStop class] setupBlock:^(CHDStopCell *cell, CHDStop *stop, NSIndexPath *indexPath) {
+        [cell setupFromStop:stop];
+    }];
+    
     [self startLocationService];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return (_menueItems == nil ? 0 : 1);
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_menueItems count];
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *menuCellIdentifier = @"MenuCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
-    CHDStop *stop = [_menueItems objectAtIndex:indexPath.row];
-    cell.textLabel.text = stop.name;
-    return cell;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([[self.datasourceManager dataForIndexPath:indexPath] isKindOfClass:[CHDStop class]]) {
+        return 65.0;
+    }
+    return tableView.rowHeight;
 }
 
 #pragma mark - Location Service
@@ -88,8 +83,7 @@
             
             // get the stops for current location and show in table
             [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion:^(NSArray *stops) {
-                self.menueItems = stops;
-                [self.tableView reloadData];
+                self.datasourceManager.sectionsDatasource = @[stops];
             }];
 
         }
