@@ -15,7 +15,6 @@
 		0AA66FF01856533E003D300C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FF31856533E003D300C /* CHDAppDelegate.m */; };
 		0AA66FF71856533E003D300C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA66FF51856533E003D300C /* Main.storyboard */; };
-		0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FF91856533E003D300C /* CHDViewController.m */; };
 		0AA66FFC1856533E003D300C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA66FFB1856533E003D300C /* Images.xcassets */; };
 		0AA670031856533E003D300C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA670021856533E003D300C /* XCTest.framework */; };
 		0AA670041856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
@@ -51,8 +50,6 @@
 		0AA66FF21856533E003D300C /* CHDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHDAppDelegate.h; sourceTree = "<group>"; };
 		0AA66FF31856533E003D300C /* CHDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHDAppDelegate.m; sourceTree = "<group>"; };
 		0AA66FF61856533E003D300C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0AA66FF81856533E003D300C /* CHDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CHDViewController.h; sourceTree = "<group>"; };
-		0AA66FF91856533E003D300C /* CHDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CHDViewController.m; sourceTree = "<group>"; };
 		0AA66FFB1856533E003D300C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0AA670011856533E003D300C /* SchnellerVerkehrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SchnellerVerkehrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA670021856533E003D300C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -93,8 +90,7 @@
 		0A068FE7185657900002EF22 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0AA66FF81856533E003D300C /* CHDViewController.h */,
-				0AA66FF91856533E003D300C /* CHDViewController.m */,
+				
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -164,8 +160,6 @@
 				0A068FE81856579A0002EF22 /* Model */,
 				0A068FE91856579F0002EF22 /* View */,
 				0A068FEA1856602E0002EF22 /* Helper */,
-				0AA66FF81856533E003D300C /* CHDViewController.h */,
-				0AA66FF91856533E003D300C /* CHDViewController.m */,
 				F94C2F401856591A003C0FC6 /* Network */,
 				0AA66FFB1856533E003D300C /* Images.xcassets */,
 				0AA66FEA1856533E003D300C /* Supporting Files */,
@@ -347,9 +341,7 @@
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0AA66FF01856533E003D300C /* main.m in Sources */,
-				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
 				0AA66FF01856533E003D300C /* main.m in Sources */,
-				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
