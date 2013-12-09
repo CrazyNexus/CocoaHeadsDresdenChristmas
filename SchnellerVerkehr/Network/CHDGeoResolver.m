@@ -11,9 +11,6 @@
 @implementation CHDGeoResolver
 
 - (void)resolveGPSToStationWithLatitude:(NSInteger)latittude logitude:(NSInteger)longitude {
-
-
 }
-
 
 @end

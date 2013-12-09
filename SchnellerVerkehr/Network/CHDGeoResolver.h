@@ -10,7 +10,7 @@
 
 @protocol CHDGeoResolverDelegate <NSObject>
 
-- (void)geoResolverFinished:(NSArray*)stationList;
+- (void)geoResolverFinished:(NSArray *)stationList;
 
 @end
 
