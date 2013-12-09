@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A068FED1856633B0002EF22 /* CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FEC1856633B0002EF22 /* CHDStop.m */; };
 		0AA66FE41856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
 		0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE51856533E003D300C /* CoreGraphics.framework */; };
 		0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE71856533E003D300C /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A068FEB1856633B0002EF22 /* CHDStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStop.h; path = Model/CHDStop.h; sourceTree = "<group>"; };
+		0A068FEC1856633B0002EF22 /* CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStop.m; path = Model/CHDStop.m; sourceTree = "<group>"; };
 		0AA66FE01856533E003D300C /* SchnellerVerkehr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchnellerVerkehr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA66FE31856533E003D300C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0AA66FE51856533E003D300C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +98,8 @@
 		0A068FE81856579A0002EF22 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A068FEB1856633B0002EF22 /* CHDStop.h */,
+				0A068FEC1856633B0002EF22 /* CHDStop.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
+				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0AA66FF01856533E003D300C /* main.m in Sources */,
 				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
 			);
