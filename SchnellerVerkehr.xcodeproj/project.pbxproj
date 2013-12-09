@@ -23,6 +23,8 @@
 		0AA6700D1856533E003D300C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6700B1856533E003D300C /* InfoPlist.strings */; };
 		0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */; };
 		17A4920B79BB42AB9D359B8E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93104B392286435796794338 /* libPods.a */; };
+		F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
+		F94C2F4418565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchnellerVerkehrTests.m; sourceTree = "<group>"; };
 		93104B392286435796794338 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F94C2F4118565A8D003C0FC6 /* CHDGeoResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDGeoResolver.h; path = Network/CHDGeoResolver.h; sourceTree = "<group>"; };
+		F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDGeoResolver.m; path = Network/CHDGeoResolver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,9 @@
 				0A068FE81856579A0002EF22 /* Model */,
 				0A068FE91856579F0002EF22 /* View */,
 				0A068FEA1856602E0002EF22 /* Helper */,
+				0AA66FF81856533E003D300C /* CHDViewController.h */,
+				0AA66FF91856533E003D300C /* CHDViewController.m */,
+				F94C2F401856591A003C0FC6 /* Network */,
 				0AA66FFB1856533E003D300C /* Images.xcassets */,
 				0AA66FEA1856533E003D300C /* Supporting Files */,
 			);
@@ -193,6 +200,15 @@
 				0AA6700B1856533E003D300C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F94C2F401856591A003C0FC6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F94C2F4118565A8D003C0FC6 /* CHDGeoResolver.h */,
+				F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +348,9 @@
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0AA66FF01856533E003D300C /* main.m in Sources */,
 				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
+				0AA66FF01856533E003D300C /* main.m in Sources */,
+				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
+				F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */,
+				F94C2F4418565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
