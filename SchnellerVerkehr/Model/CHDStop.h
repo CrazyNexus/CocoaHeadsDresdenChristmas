@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^StopSearchCompletionBlock)(NSArray *);
+typedef void (^StopSearchCompletionBlock)(NSArray *stops);
 
 @interface CHDStop : NSObject
 
 @property (nonatomic, strong) NSString  *ID;
 @property (nonatomic, strong) NSString  *city;
 @property (nonatomic, strong) NSString  *name;
-@property (nonatomic) NSInteger         *distance;
+@property (nonatomic) NSInteger         distance;
 
-+ (void)findByLatitude:(CGFloat)latittude logitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
++ (void)findByLatitude:(CGFloat)latittude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
 
 @end
