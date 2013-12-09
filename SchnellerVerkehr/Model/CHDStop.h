@@ -10,8 +10,9 @@
 
 @interface CHDStop : NSObject
 
-@property (nonatomic, strong) NSString *ID;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString  *ID;
+@property (nonatomic, strong) NSString  *city;
+@property (nonatomic, strong) NSString  *name;
+@property (nonatomic) NSInteger         *distance;
 
 @end
