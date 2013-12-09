@@ -23,10 +23,10 @@
     return self;
 }
 
-+ (void)findByLatitude:(CGFloat)latittude logitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion {
++ (void)findByLatitude:(CGFloat)latitude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion {
     static NSString *kURL = @"http://www.vvo-mobil.de/de/autocomplete/geolocation.do";
     
-    NSString   *urlString = [kURL stringByAppendingFormat:@"?id=%f-%f", longitude, latittude];
+    NSString   *urlString = [kURL stringByAppendingFormat:@"?id=%f-%f", longitude, latitude];
     NSURL       *url = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *request= [NSMutableURLRequest requestWithURL:url];

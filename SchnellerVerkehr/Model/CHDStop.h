@@ -19,6 +19,6 @@ typedef void (^StopSearchCompletionBlock)(NSArray *stops);
 
 - (instancetype)initWithCity:(NSString *)city;
 - (instancetype)initWithCity:(NSString *)city name:(NSString *)name;
-+ (void)findByLatitude:(CGFloat)latittude logitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
++ (void)findByLatitude:(CGFloat)latitude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
 
 @end

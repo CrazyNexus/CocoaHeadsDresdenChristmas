@@ -12,15 +12,11 @@
 @implementation CHDEFAPlugin
 
 - (void)findStopsWithName:(NSString *)name {
-}
+    NSLog(@"Find %@", name);
 
-- (void)JSONwithAllStopsForName:(NSString *)name {
     NSString        *url        = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_STOPFINDER_REQUEST?locationServerActive=1&outputFormat=JSON&type_sf=stop&name_sf=%@", name];
 
     NSURLSession    *session    = [NSURLSession sharedSession];
-    [session invalidateAndCancel];
-
-    session = [NSURLSession sharedSession];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
@@ -42,12 +38,14 @@
                         if (!jsonError) {
                             NSArray *stopList = JSON[@"stopFinder"];
 
-                            for (NSDictionary *stopDict in stopList) {
+                            for (NSDictionary * stopDict in stopList) {
                                 NSString *city = stopDict[@"ref.place"];
                                 NSString *name = [[stopDict[@"name"] componentsSeparatedByString:@","] lastObject];
 
                                 [stops addObject:[[CHDStop alloc] initWithCity:city name:name]];
                             }
+
+                            NSLog(@"found %@", stops);
 
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
