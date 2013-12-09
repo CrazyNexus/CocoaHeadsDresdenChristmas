@@ -10,14 +10,27 @@
 
 @implementation CHDStop
 
-+ (void)findByLatitude:(CGFloat)latittude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion {
-    static NSString     *kURL       = @"http://www.vvo-mobil.de/de/autocomplete/geolocation.do";
+- (instancetype)initWithCity:(NSString *)city {
+    return [self initWithCity:city name:@"Hauptbahnhof"];
+}
 
-    NSString            *urlString  = [kURL stringByAppendingFormat:@"?id=%f-%f", longitude, latittude];
-    NSURL               *url        = [NSURL URLWithString:urlString];
+- (instancetype)initWithCity:(NSString *)city name:(NSString *)name {
+    self = [super init];
+    if (self) {
+        _city = city;
+        _name = name;
+    }
+    return self;
+}
 
-    NSMutableURLRequest *request    = [NSMutableURLRequest requestWithURL:url];
-
++ (void)findByLatitude:(CGFloat)latitude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion {
+    static NSString *kURL = @"http://www.vvo-mobil.de/de/autocomplete/geolocation.do";
+    
+    NSString   *urlString = [kURL stringByAppendingFormat:@"?id=%f-%f", longitude, latitude];
+    NSURL       *url = [NSURL URLWithString:urlString];
+    
+    NSMutableURLRequest *request= [NSMutableURLRequest requestWithURL:url];
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler: ^(NSURLResponse *response, NSData *data, NSError *connectionError) {

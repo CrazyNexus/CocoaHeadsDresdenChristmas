@@ -17,6 +17,8 @@ typedef void (^StopSearchCompletionBlock)(NSArray *stops);
 @property (nonatomic, strong) NSString  *name;
 @property (nonatomic) NSInteger         distance;
 
-+ (void)findByLatitude:(CGFloat)latittude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
+- (instancetype)initWithCity:(NSString *)city;
+- (instancetype)initWithCity:(NSString *)city name:(NSString *)name;
++ (void)findByLatitude:(CGFloat)latitude longitude:(CGFloat)longitude completion:(StopSearchCompletionBlock)completion;
 
 @end
