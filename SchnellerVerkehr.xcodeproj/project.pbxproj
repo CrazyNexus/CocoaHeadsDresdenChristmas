@@ -22,9 +22,9 @@
 		0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */; };
 		17A4920B79BB42AB9D359B8E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93104B392286435796794338 /* libPods.a */; };
 		B84A18361856700800A984D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
+		B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A1837185677CD00A984D0 /* CoreLocation.framework */; };
 		B86712021856690800A97960 /* CHDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86712011856690800A97960 /* CHDSearchViewController.m */; };
-		F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
-		F94C2F4418565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
+		F94C2F4318565A8D003C0FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +58,7 @@
 		0AA6700C1856533E003D300C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchnellerVerkehrTests.m; sourceTree = "<group>"; };
 		93104B392286435796794338 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B84A1837185677CD00A984D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
 		B86712011856690800A97960 /* CHDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDSearchViewController.m; path = Controller/CHDSearchViewController.m; sourceTree = "<group>"; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */,
 				0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */,
 				0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */,
 				0AA66FE41856533E003D300C /* Foundation.framework in Frameworks */,
@@ -143,6 +145,7 @@
 		0AA66FE21856533E003D300C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B84A1837185677CD00A984D0 /* CoreLocation.framework */,
 				0AA66FE31856533E003D300C /* Foundation.framework */,
 				0AA66FE51856533E003D300C /* CoreGraphics.framework */,
 				0AA66FE71856533E003D300C /* UIKit.framework */,
@@ -162,7 +165,6 @@
 				0A068FE81856579A0002EF22 /* Model */,
 				0A068FE91856579F0002EF22 /* View */,
 				0A068FEA1856602E0002EF22 /* Helper */,
-				F94C2F401856591A003C0FC6 /* Network */,
 				0AA66FFB1856533E003D300C /* Images.xcassets */,
 				0AA66FEA1856533E003D300C /* Supporting Files */,
 			);
@@ -335,7 +337,7 @@
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
-				F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
+				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

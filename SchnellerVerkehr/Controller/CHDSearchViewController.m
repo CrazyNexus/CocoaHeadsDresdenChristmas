@@ -7,10 +7,13 @@
 //
 
 #import "CHDSearchViewController.h"
+#import "CHDStop.h"
 
 @interface CHDSearchViewController ()
 
-@property (nonatomic, strong) NSMutableArray *menueItems;
+@property (nonatomic, strong) NSArray *menueItems;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic) CLLocation *currentLocation;
 
 @end
 
@@ -20,7 +23,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    _menueItems = [[NSMutableArray alloc] initWithObjects:@"Detailsuche", @"Kontakte", @"Favoriten", nil];
+    //_menueItems = [[NSMutableArray alloc] initWithObjects:@"Detailsuche", @"Kontakte", @"Favoriten", nil];
+
+    [self startLocationService];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,7 +35,7 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return (_menueItems == nil ? 0 : 1);
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -40,9 +45,76 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *menuCellIdentifier = @"MenuCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:menuCellIdentifier forIndexPath:indexPath];
-    
-    cell.textLabel.text = [_menueItems objectAtIndex:indexPath.row];
+    CHDStop *stop = [_menueItems objectAtIndex:indexPath.row];
+    cell.textLabel.text = stop.name;
     return cell;
+}
+
+#pragma mark - Location Service
+
+-(void)startLocationService {
+    _locationManager          = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    if ([CLLocationManager locationServicesEnabled]) {
+        [_locationManager startUpdatingLocation];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"Error to get the current location"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    CLLocation *location = [locations lastObject];
+    if (signbit(location.horizontalAccuracy)) {
+        NSLog(@"Accuracity is negative, coordinates are not avaliable");
+    }
+    else {
+        NSDate *eventDate = location.timestamp;
+        NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+        if (howRecent < -0.0 && howRecent > -10.0) {
+            // Positionsbestimmung stoppen
+            [manager stopUpdatingLocation];
+            NSLog(@"Latitude: %f", location.coordinate.latitude);
+            NSLog(@"Longitude: %f", location.coordinate.longitude);
+            
+            // save new location values for further processing
+            _currentLocation = location;
+            
+            // get the stops for current location and show in table
+            [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion:^(NSArray *stops) {
+                self.menueItems = stops;
+                [self.tableView reloadData];
+            }];
+
+        }
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [manager stopUpdatingLocation];
+    if (error.code == kCLErrorDenied) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"LocationDeniedMsgKey", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OKKey", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    // if no WiFi or internet is available
+    if (error.code == kCLErrorLocationUnknown) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"NoInternetKey", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"OKKey", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 @end

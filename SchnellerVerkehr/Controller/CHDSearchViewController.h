@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface CHDSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CHDSearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *addressLabel;
 @property (weak, nonatomic) IBOutlet UITextField *destinationTextField;
