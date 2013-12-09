@@ -61,8 +61,6 @@
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
 		B86712011856690800A97960 /* CHDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDSearchViewController.m; path = Controller/CHDSearchViewController.m; sourceTree = "<group>"; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		F94C2F4118565A8D003C0FC6 /* CHDGeoResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDGeoResolver.h; path = Network/CHDGeoResolver.h; sourceTree = "<group>"; };
-		F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDGeoResolver.m; path = Network/CHDGeoResolver.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,15 +196,6 @@
 				0AA6700B1856533E003D300C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F94C2F401856591A003C0FC6 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				F94C2F4118565A8D003C0FC6 /* CHDGeoResolver.h */,
-				F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */,
-			);
-			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,7 +344,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */,
-				F94C2F4418565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
