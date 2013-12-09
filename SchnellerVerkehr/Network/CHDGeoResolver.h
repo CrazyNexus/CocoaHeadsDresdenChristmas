@@ -10,12 +10,13 @@
 
 @protocol CHDGeoResolverDelegate <NSObject>
 
-- (void)geoResolverFinished:(NSArray *)stationList;
+- (void)geoResolverFinished:(NSArray *)stopList;
 
 @end
 
 @interface CHDGeoResolver : NSObject
 
-- (void)resolveGPSToStationWithLatitude:(NSInteger)latittude logitude:(NSInteger)longitude;
+- (void)resolveGPSToStopWithLatitude:(double)latittude longitude:(double)longitude delegate:(id <CHDGeoResolverDelegate> )delegate;
+- (void)cancelConnection;
 
 @end
