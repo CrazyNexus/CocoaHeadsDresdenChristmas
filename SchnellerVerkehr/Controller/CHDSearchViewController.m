@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) NSArray *menueItems;
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic) CLLocation *currentLocation;
 
 @end
 
@@ -51,6 +50,7 @@
 }
 
 #pragma mark - Location Service
+#pragma mark Current Location
 
 -(void)startLocationService {
     _locationManager          = [[CLLocationManager alloc] init];
@@ -84,7 +84,7 @@
             NSLog(@"Longitude: %f", location.coordinate.longitude);
             
             // save new location values for further processing
-            _currentLocation = location;
+            [self getStreetFromLocation:location];
             
             // get the stops for current location and show in table
             [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion:^(NSArray *stops) {
@@ -115,6 +115,16 @@
                                               otherButtonTitles:nil];
         [alert show];
     }
+}
+
+#pragma mark - reverse geocoding
+
+-(void)getStreetFromLocation:(CLLocation *)currentLocation {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
+        _addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+    }];
 }
 
 @end
