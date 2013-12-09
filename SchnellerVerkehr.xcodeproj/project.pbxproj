@@ -12,10 +12,8 @@
 		0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE51856533E003D300C /* CoreGraphics.framework */; };
 		0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE71856533E003D300C /* UIKit.framework */; };
 		0AA66FEE1856533E003D300C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA66FEC1856533E003D300C /* InfoPlist.strings */; };
-		0AA66FF01856533E003D300C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FF31856533E003D300C /* CHDAppDelegate.m */; };
 		0AA66FF71856533E003D300C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AA66FF51856533E003D300C /* Main.storyboard */; };
-		0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FF91856533E003D300C /* CHDViewController.m */; };
 		0AA66FFC1856533E003D300C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AA66FFB1856533E003D300C /* Images.xcassets */; };
 		0AA670031856533E003D300C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA670021856533E003D300C /* XCTest.framework */; };
 		0AA670041856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
@@ -23,6 +21,8 @@
 		0AA6700D1856533E003D300C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6700B1856533E003D300C /* InfoPlist.strings */; };
 		0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */; };
 		17A4920B79BB42AB9D359B8E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93104B392286435796794338 /* libPods.a */; };
+		73C881AD18566D9700297801 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
+		73C881AE18566DA100297801 /* CHDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FF91856533E003D300C /* CHDViewController.m */; };
 		F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
 		F94C2F4418565A8D003C0FC6 /* CHDGeoResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = F94C2F4218565A8D003C0FC6 /* CHDGeoResolver.m */; };
 /* End PBXBuildFile section */
@@ -344,12 +344,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73C881AE18566DA100297801 /* CHDViewController.m in Sources */,
+				73C881AD18566D9700297801 /* main.m in Sources */,
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
-				0AA66FF01856533E003D300C /* main.m in Sources */,
-				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
-				0AA66FF01856533E003D300C /* main.m in Sources */,
-				0AA66FFA1856533E003D300C /* CHDViewController.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* CHDGeoResolver.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
