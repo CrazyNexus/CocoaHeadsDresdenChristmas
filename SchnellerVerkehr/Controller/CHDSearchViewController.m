@@ -37,7 +37,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //_menueItems = [[NSMutableArray alloc] initWithObjects:@"Detailsuche", @"Kontakte", @"Favoriten", nil];
 
     [[self.destinationTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
@@ -46,10 +45,8 @@
      subscribeNext: ^(NSString *name) {
          [self.efaPlugin findStopsWithName:name];
      }];
-
     
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
-    
     [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStop class] setupBlock:^(CHDStopCell *cell, CHDStop *stop, NSIndexPath *indexPath) {
         [cell setupFromStop:stop];
     }];
@@ -97,10 +94,10 @@
             [manager stopUpdatingLocation];
             NSLog(@"Latitude: %f", location.coordinate.latitude);
             NSLog(@"Longitude: %f", location.coordinate.longitude);
-
+            
             // save new location values for further processing
             [self getStreetFromLocation:location];
-
+            
             // get the stops for current location and show in table
             [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
                 self.datasourceManager.sectionsDatasource = @[[stops copy]];
