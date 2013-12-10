@@ -12,6 +12,8 @@
 
 @interface CHDLeg ()
 
++ (NSDateFormatter *)sharedDateFormatter;
+
 - (void)setupFromData:(NSDictionary *)dictionary;
 
 @end
@@ -26,6 +28,17 @@
     CHDLeg *leg = [[self alloc] init];
     [leg setupFromData:dictionary];
     return leg;
+}
+
++ (NSDateFormatter *)sharedDateFormatter {
+    static NSDateFormatter *formatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMtt HH:mm";
+    });
+    
+    return formatter;
 }
 
 - (void)setupFromData:(NSDictionary *)dictionary {
@@ -46,8 +59,9 @@
         for (NSDictionary *stopDict in stops) {
             CHDStop *stop = [[CHDStop alloc] init];
             
-            stop.name = [[stopDict objectForKey:@"nameWO"] nonEmptyStringValue];
-            stop.ID   = [[stopDict objectForKey:@"ref.id"] stringValue];
+            stop.name           = [[stopDict objectForKey:@"nameWO"] nonEmptyStringValue];
+            stop.ID             = [[stopDict objectForKey:@"ref.id"] stringValue];
+            stop.departureDate  = [[CHDLeg sharedDateFormatter] dateFromString:[stopDict objectForKey:@"ref.depDateTime"]];
             
             [stopsArray addObject:stop];
         }
