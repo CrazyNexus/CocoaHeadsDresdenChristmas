@@ -113,18 +113,18 @@
     [manager stopUpdatingLocation];
     if (error.code == kCLErrorDenied) {
         UIAlertView *alert = [[UIAlertView alloc]   initWithTitle       :nil
-                                                    message             :NSLocalizedString(@"LocationDeniedMsgKey", nil)
+                                                    message             :[error localizedDescription]
                                                     delegate            :nil
-                                                    cancelButtonTitle   :NSLocalizedString(@"OKKey", nil)
+                                                    cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
         [alert show];
     }
     // if no WiFi or internet is available
     if (error.code == kCLErrorLocationUnknown) {
         UIAlertView *alert = [[UIAlertView alloc]   initWithTitle       :nil
-                                                    message             :NSLocalizedString(@"NoInternetKey", nil)
+                                                    message             :[error localizedDescription]
                                                     delegate            :nil
-                                                    cancelButtonTitle   :NSLocalizedString(@"OKKey", nil)
+                                                    cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
         [alert show];
     }
