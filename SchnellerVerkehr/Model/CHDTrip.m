@@ -3,7 +3,7 @@
 //  SchnellerVerkehr
 //
 //  Created by Steffen on 10.12.13.
-//  Copyright (c) 2013 Couchfunk. All rights reserved.
+//  Copyright (c) 2013 CocoaHeads Dresden. All rights reserved.
 //
 
 #import "CHDTrip.h"
@@ -12,35 +12,57 @@
 
 @implementation CHDTrip
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration interchange:(NSInteger)interchange legs:(NSArray*)legs{
+- (instancetype)initWithDuration:(NSTimeInterval)duration interchange:(NSInteger)interchange legs:(NSArray *)legs {
     self = [super init];
     if (self) {
-        _duration = duration;
-        _interchange = interchange;
-        _legs = legs;
+        _duration       = duration;
+        _interchange    = interchange;
+        _legs           = legs;
     }
     return self;
 }
 
 + (void)findTripWithOrigin:(CHDStop *)origin destination:(CHDStop *)destination calcNumberOfTrips:(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion {
+    if (!origin.ID || !destination.ID) {
+        if (completion) {
+            completion(nil);
+        }
+        return;
+    }
+
+    NSString    *originName         = origin.ID;
+    NSString    *originType         = @"stopID";
+    NSString    *destinationName    = destination.ID;
+    NSString    *destinationType    = @"stopID";
+
+    if ([origin.ID hasPrefix:@"poiID:"]) {
+        originName  = [origin.ID substringFromIndex:6];
+        originType  = @"poiID";
+    }
+
+    if ([destination.ID hasPrefix:@"poiID:"]) {
+        destinationName = [destination.ID substringFromIndex:6];
+        destinationType = @"poiID";
+    }
+
     NSString *url = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_TRIP_REQUEST2"
                      "?sessionID=0"
                      "&language=de"
                      "&calcNumberOfTrips=%lu"
                      "&coordOutputFormat=none"
                      "&name_origin=%@"
-                     "&type_origin=stopID"
+                     "&type_origin=%@"
                      "&name_destination=%@"
-                     "&type_destination=stopID"
+                     "&type_destination=%@"
                      "&changeSpeed=normal"
-"&includedMeans=0&includedMeans=8&includedMeans=5&includedMeans=1&includedMeans=9&includedMeans=6&includedMeans=4&includedMeans=10&outputFormat=JSON",
-                     (unsigned long)calcNumberOfTrips, origin.ID, destination.ID];
+                     "&includedMeans=0&includedMeans=8&includedMeans=5&includedMeans=1&includedMeans=9&includedMeans=6&includedMeans=4&includedMeans=10&outputFormat=JSON",
+                     (unsigned long)calcNumberOfTrips, originName, originType, destinationName, destinationType];
 
     NSURLSession *session = [NSURLSession sharedSession];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    [[session   dataTaskWithURL     :[NSURL URLWithString:url]
+    [[session   dataTaskWithURL     :[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                 completionHandler   : ^(NSData *data,
                                         NSURLResponse *response,
                                         NSError *error) {
@@ -56,11 +78,9 @@
                         NSMutableArray *trips = [[NSMutableArray alloc] init];
 
                         if (!jsonError) {
-
-                            for (NSDictionary *tripDictionary in JSON[@"trips"]) {
-
+                            for (NSDictionary * tripDictionary in JSON[@"trips"]) {
 #warning needs to be fixed
-                                NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                                NSDateFormatter * df = [[NSDateFormatter alloc] init];
                                 df.dateFormat = @"mm:ss";
                                 NSDate *date = [df dateFromString:[tripDictionary valueForKeyPath:@"trip.duration"]];
                                 NSTimeInterval duration = [date timeIntervalSinceReferenceDate];
@@ -68,18 +88,18 @@
                                 NSInteger interchange = [[tripDictionary valueForKeyPath:@"trip.interchange"] integerValue];
                                 NSMutableArray *legs = [NSMutableArray array];
 
-                                for (NSDictionary *legDictionary in [tripDictionary valueForKeyPath:@"trip.legs"] ) {
+                                for (NSDictionary * legDictionary in[tripDictionary valueForKeyPath : @"trip.legs"]) {
                                     [legs addObject:[CHDLeg legWithDictionary:legDictionary]];
                                 }
 
-                                [trips addObject:[[CHDTrip alloc] initWithDuration:duration
-                                                                       interchange:interchange
-                                                                              legs:legs]];
+                                [trips addObject:[[CHDTrip alloc]   initWithDuration:duration
+                                                                    interchange     :interchange
+                                                                    legs            :legs]];
                             }
 
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                
+
                                 if (completion) {
                                     completion(trips);
                                 }

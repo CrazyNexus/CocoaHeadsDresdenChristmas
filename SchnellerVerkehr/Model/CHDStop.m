@@ -3,7 +3,7 @@
 //  SchnellerVerkehr
 //
 //  Created by Michael Berg on 09.12.13.
-//  Copyright (c) 2013 Couchfunk. All rights reserved.
+//  Copyright (c) 2013 CocoaHeads Dresden. All rights reserved.
 //
 
 #import "CHDStop.h"
@@ -75,7 +75,7 @@
 
                             [temp enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *cancel) {
                                 CHDStop *stop = [[CHDStop alloc] initWithCity:obj[@"city"] name:obj[@"name"]];
-                                stop.ID = obj[@"id"];
+                                stop.ID = obj[@"stopID"];
                                 stop.distance = 666;
                                 [stops addObject:stop];
                             }];
