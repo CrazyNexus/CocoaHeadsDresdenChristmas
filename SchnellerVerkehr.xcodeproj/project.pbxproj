@@ -25,7 +25,6 @@
 		0AA6700D1856533E003D300C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6700B1856533E003D300C /* InfoPlist.strings */; };
 		0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */; };
 		17A4920B79BB42AB9D359B8E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93104B392286435796794338 /* libPods.a */; };
-		73C881B11856722900297801 /* CHDEFAPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 73C881B01856722900297801 /* CHDEFAPlugin.m */; };
 		B84A18361856700800A984D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A1837185677CD00A984D0 /* CoreLocation.framework */; };
 		B86712021856690800A97960 /* CHDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86712011856690800A97960 /* CHDSearchViewController.m */; };
@@ -70,9 +69,6 @@
 		0AA6700A1856533E003D300C /* SchnellerVerkehrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SchnellerVerkehrTests-Info.plist"; sourceTree = "<group>"; };
 		0AA6700C1856533E003D300C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchnellerVerkehrTests.m; sourceTree = "<group>"; };
-		73C881AF1856722900297801 /* CHDEFAPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDEFAPlugin.h; path = Controller/CHDEFAPlugin.h; sourceTree = "<group>"; };
-		73C881B01856722900297801 /* CHDEFAPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDEFAPlugin.m; path = Controller/CHDEFAPlugin.m; sourceTree = "<group>"; };
-		73C881B218567B7E00297801 /* CHDStopListDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CHDStopListDelegate.h; path = Controller/CHDStopListDelegate.h; sourceTree = "<group>"; };
 		93104B392286435796794338 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84A1837185677CD00A984D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
@@ -122,9 +118,6 @@
 				0A068FEC1856633B0002EF22 /* CHDStop.m */,
 				0A068FF5185696C50002EF22 /* CHDLeg.h */,
 				0A068FF6185696C50002EF22 /* CHDLeg.m */,
-				73C881AF1856722900297801 /* CHDEFAPlugin.h */,
-				73C881B01856722900297801 /* CHDEFAPlugin.m */,
-				73C881B218567B7E00297801 /* CHDStopListDelegate.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -367,7 +360,6 @@
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */,
-				73C881B11856722900297801 /* CHDEFAPlugin.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);

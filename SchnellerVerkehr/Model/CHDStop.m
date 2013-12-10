@@ -28,13 +28,13 @@
     NSLog(@"Find %@", name);
 #endif
     
-    NSString        *url        = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_STOPFINDER_REQUEST?locationServerActive=1&outputFormat=JSON&type_sf=stop&name_sf=%@", name];
+    NSString        *url        = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_STOPFINDER_REQUEST?locationServerActive=1&outputFormat=JSON&type_sf=any&name_sf=%@", name];
     
     NSURLSession    *session    = [NSURLSession sharedSession];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [[session   dataTaskWithURL     :[NSURL URLWithString:url]
+    [[session   dataTaskWithURL     :[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                 completionHandler   : ^(NSData *data,
                                         NSURLResponse *response,
                                         NSError *error) {
@@ -48,18 +48,37 @@
                                                                     error               :&jsonError];
                         
                         NSMutableArray *stops = [[NSMutableArray alloc] init];
+                        NSMutableArray *temp = [[NSMutableArray alloc] init];
                         
                         if (!jsonError) {
                             NSArray *stopList = JSON[@"stopFinder"];
                             
+                            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                            [f setNumberStyle:NSNumberFormatterDecimalStyle];
+                            
                             for (NSDictionary * stopDict in stopList) {
-                                NSString *city = stopDict[@"ref.place"];
-                                NSString *name = [[stopDict[@"name"] componentsSeparatedByString:@","] lastObject];
+                                NSString *city = stopDict[@"ref"][@"place"];
+                                NSString *name = [[[stopDict[@"name"] componentsSeparatedByString:@","] lastObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                                NSString *qualityString = stopDict[@"quality"];
+                                NSNumber *quality = [f numberFromString:qualityString];
+                                if (!quality) {
+                                    quality = @0;
+                                }
                                 
-                                [stops addObject:[[CHDStop alloc] initWithCity:city name:name]];
+                                NSString *stopID = stopDict[@"stateless"];
+                                
+                                [temp addObject:@{ @"quality":quality, @"city":city, @"name":name, @"stopID":stopID }];
+                                [temp sortUsingComparator: ^NSComparisonResult (id obj1, id obj2) {
+                                    return [obj2[@"quality"] compare:obj1[@"quality"]]; // biggest quality is best
+                                }];
                             }
                             
-                            NSLog(@"found %@", stops);
+                            [temp enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *cancel) {
+                                CHDStop *stop = [[CHDStop alloc] initWithCity:obj[@"city"] name:obj[@"name"]];
+                                stop.ID = obj[@"id"];
+                                stop.distance = 666;
+                                [stops addObject:stop];
+                            }];
                             
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

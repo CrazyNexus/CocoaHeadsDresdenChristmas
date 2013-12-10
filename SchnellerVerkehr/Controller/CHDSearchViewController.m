@@ -10,13 +10,10 @@
 #import "CHDStop.h"
 #import "CHDDatasourceManager.h"
 #import "CHDStopCell.h"
-#import "CHDEFAPlugin.h"
-#import "CHDStopListDelegate.h"
 
-@interface CHDSearchViewController () <CHDStopListDelegate, UITextFieldDelegate>
+@interface CHDSearchViewController () <UITextFieldDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, strong) CHDEFAPlugin      *efaPlugin;
 
 @property (nonatomic, strong) CHDDatasourceManager *datasourceManager;
 
@@ -28,22 +25,23 @@
     self = [super initWithCoder:aDecoder];
 
     if (self) {
-        self.efaPlugin          = [[CHDEFAPlugin alloc] init];
-        self.efaPlugin.delegate = self;
+        
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
+    
+    __weak CHDSearchViewController *weakSelf = self;
     [[self.destinationTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
           return [string length] >= 3;
       }]
      subscribeNext: ^(NSString *name) {
-         [self.efaPlugin findStopsWithName:name];
+         [CHDStop findByName:name completion:^(NSArray *stops) {
+             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
+         }];
      }];
     
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
@@ -136,12 +134,6 @@
         self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
         self.destinationTextField.placeholder = [NSString stringWithFormat:@"%@, ", aPlacemark.name];
     }];
-}
-
-#pragma mark - Stop List Delegate
-
-- (void)receivedStopsList:(NSArray *)stops {
-    self.datasourceManager.sectionsDatasource = @[[stops copy]];
 }
 
 #pragma mark - UITextField Delegate
