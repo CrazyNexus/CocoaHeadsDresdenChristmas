@@ -13,7 +13,7 @@
 #import "CHDEFAPlugin.h"
 #import "CHDStopListDelegate.h"
 
-@interface CHDSearchViewController () <CHDStopListDelegate>
+@interface CHDSearchViewController () <CHDStopListDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CHDEFAPlugin      *efaPlugin;
@@ -28,7 +28,7 @@
     self = [super initWithCoder:aDecoder];
 
     if (self) {
-        self.efaPlugin = [[CHDEFAPlugin alloc] init];
+        self.efaPlugin          = [[CHDEFAPlugin alloc] init];
         self.efaPlugin.delegate = self;
     }
     return self;
@@ -133,7 +133,8 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:currentLocation completionHandler: ^(NSArray *placemarks, NSError *error) {
         CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
-        _addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        self.destinationTextField.placeholder = [NSString stringWithFormat:@"%@, ", aPlacemark.name];
     }];
 }
 
@@ -141,6 +142,12 @@
 
 - (void)receivedStopsList:(NSArray *)stops {
     self.datasourceManager.sectionsDatasource = @[[stops copy]];
+}
+
+#pragma mark - UITextField Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.destinationTextField.text = self.destinationTextField.placeholder;
 }
 
 @end

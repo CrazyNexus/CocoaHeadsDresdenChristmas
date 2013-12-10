@@ -17,6 +17,7 @@ typedef void (^StopSearchCompletionBlock)(NSArray *stops);
 @property (nonatomic, strong) NSString  *name;
 @property (nonatomic) NSInteger         distance;
 
+
 - (instancetype)initWithCity:(NSString *)city;
 - (instancetype)initWithCity:(NSString *)city name:(NSString *)name;
 
