@@ -108,34 +108,40 @@
 #ifdef DEBUG
         NSLog(@"GeoResolver Response:\n%@", response);
 #endif
-
-        if (completion) {
-            NSError *error;
-            NSArray *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-
-            if (error || [results count] < 2) {
+        if (!response) {
+            if (completion) {
+                completion(nil);
+            }
+            return;
+        }
+        
+        NSError *error;
+        NSArray *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+        
+        if (error || [results count] < 2) {
+            completion(nil);
+            return;
+        }
+        
+        NSMutableArray *stops = [NSMutableArray arrayWithCapacity:[results count] - 1];
+        
+        for (NSUInteger i = 1; i < [results count]; i++) {
+            NSArray *components = [(NSString *)results[i] componentsSeparatedByString : @"|"];
+            
+            if ([components count] != 3) {
                 completion(nil);
                 return;
             }
-
-            NSMutableArray *stops = [NSMutableArray arrayWithCapacity:[results count] - 1];
-
-            for (NSUInteger i = 1; i < [results count]; i++) {
-                NSArray *components = [(NSString *)results[i] componentsSeparatedByString : @"|"];
-
-                if ([components count] != 3) {
-                    completion(nil);
-                    return;
-                }
-
-                CHDStop *stop = [[CHDStop alloc] init];
-                stop.ID = components[0];
-                stop.name = components[1];
-                stop.distance = [components[2] integerValue];
-
-                [stops addObject:stop];
-            }
-
+            
+            CHDStop *stop = [[CHDStop alloc] init];
+            stop.ID = components[0];
+            stop.name = components[1];
+            stop.distance = [components[2] integerValue];
+            
+            [stops addObject:stop];
+        }
+        
+        if (completion) {
             completion(stops);
         }
     }];
