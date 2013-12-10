@@ -18,6 +18,8 @@
 @property (nonatomic, strong) CHDDatasourceManager  *datasourceManager;
 @property (nonatomic, strong) NSArray               *menuItems;
 
+@property (nonatomic) BOOL showMore;
+
 @end
 
 @implementation CHDSearchViewController
@@ -42,8 +44,8 @@
       }]
      subscribeNext: ^(NSString *name) {
          [CHDStop findByName:name completion: ^(NSArray *stops) {
-             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
-             //weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], [_menuItems copy]];
+             //weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
+             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], [_menuItems copy]];
          }];
      }];
     
@@ -51,8 +53,10 @@
     [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStop class] setupBlock: ^(CHDStopCell *cell, CHDStop *stop, NSIndexPath *indexPath) {
         [cell setupFromStop:stop];
     }];
-    [self.datasourceManager registerCellReuseIdentifier:@"MenuCell" forDataObject:[NSString class] setupBlock: ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
+    [self.datasourceManager registerCellReuseIdentifier:@"MenuCell" forDataObject:[@"String" class] setupBlock: ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
         cell.textLabel.text = item;
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_right"]];
+        cell.accessoryView = imageView ;
     }];
     
     [self startLocationService];
@@ -79,7 +83,7 @@
             }
             break;
         case 1:
-            // check if contacts or favorits selected
+
             break;
     }
 }
@@ -123,8 +127,8 @@
             
             // get the stops for current location and show in table
             [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
-                self.datasourceManager.sectionsDatasource = @[[stops copy]];
-                //self.datasourceManager.sectionsDatasource = @[[stops copy],[_menuItems copy]];
+                //self.datasourceManager.sectionsDatasource = @[[stops copy]];
+                self.datasourceManager.sectionsDatasource = @[[stops copy],[_menuItems copy]];
             }];
         }
     }
