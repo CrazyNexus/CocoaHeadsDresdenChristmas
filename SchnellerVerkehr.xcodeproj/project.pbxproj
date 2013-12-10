@@ -30,6 +30,9 @@
 		B84A18361856700800A984D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A1837185677CD00A984D0 /* CoreLocation.framework */; };
 		B86712021856690800A97960 /* CHDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86712011856690800A97960 /* CHDSearchViewController.m */; };
+		B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */; };
+		B8A3AA511857658C00F9D72F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA501857658B00F9D72F /* AddressBook.framework */; };
+		B8A3AA531857659400F9D72F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA521857659400F9D72F /* AddressBookUI.framework */; };
 		F94C2F4318565A8D003C0FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
@@ -79,6 +82,10 @@
 		B84A1837185677CD00A984D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
 		B86712011856690800A97960 /* CHDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDSearchViewController.m; path = Controller/CHDSearchViewController.m; sourceTree = "<group>"; };
+		B8A3AA4D18574F5300F9D72F /* CHDContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDContactCell.h; path = View/CHDContactCell.h; sourceTree = "<group>"; };
+		B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDContactCell.m; path = View/CHDContactCell.m; sourceTree = "<group>"; };
+		B8A3AA501857658B00F9D72F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		B8A3AA521857659400F9D72F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8A3AA531857659400F9D72F /* AddressBookUI.framework in Frameworks */,
+				B8A3AA511857658C00F9D72F /* AddressBook.framework in Frameworks */,
 				B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */,
 				0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */,
 				0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */,
@@ -137,6 +146,8 @@
 			children = (
 				0A068FF2185685DA0002EF22 /* CHDStopCell.h */,
 				0A068FF3185685DA0002EF22 /* CHDStopCell.m */,
+				B8A3AA4D18574F5300F9D72F /* CHDContactCell.h */,
+				B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -175,6 +186,8 @@
 		0AA66FE21856533E003D300C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B8A3AA521857659400F9D72F /* AddressBookUI.framework */,
+				B8A3AA501857658B00F9D72F /* AddressBook.framework */,
 				B84A1837185677CD00A984D0 /* CoreLocation.framework */,
 				0AA66FE31856533E003D300C /* Foundation.framework */,
 				0AA66FE51856533E003D300C /* CoreGraphics.framework */,
@@ -373,6 +386,7 @@
 				0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
 				0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */,
+				B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

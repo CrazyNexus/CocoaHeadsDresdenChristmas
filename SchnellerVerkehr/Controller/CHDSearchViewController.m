@@ -13,9 +13,10 @@
 
 @interface CHDSearchViewController () <UITextFieldDelegate, UITableViewDelegate>
 
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) CLLocationManager     *locationManager;
 
-@property (nonatomic, strong) CHDDatasourceManager *datasourceManager;
+@property (nonatomic, strong) CHDDatasourceManager  *datasourceManager;
+@property (nonatomic, strong) NSArray               *menuItems;
 
 @end
 
@@ -23,9 +24,8 @@
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-
+    
     if (self) {
-        
     }
     return self;
 }
@@ -33,43 +33,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _menuItems = [[NSArray alloc] initWithObjects:@"Kontakte", @"Favorit", nil];
+    
     __weak CHDSearchViewController *weakSelf = self;
     [[self.destinationTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
           return [string length] >= 3;
       }]
      subscribeNext: ^(NSString *name) {
-         [CHDStop findByName:name completion:^(NSArray *stops) {
+         [CHDStop findByName:name completion: ^(NSArray *stops) {
              weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
+             //weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], [_menuItems copy]];
          }];
      }];
     
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
-    [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStop class] setupBlock:^(CHDStopCell *cell, CHDStop *stop, NSIndexPath *indexPath) {
+    [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStop class] setupBlock: ^(CHDStopCell *cell, CHDStop *stop, NSIndexPath *indexPath) {
         [cell setupFromStop:stop];
+    }];
+    [self.datasourceManager registerCellReuseIdentifier:@"MenuCell" forDataObject:[NSString class] setupBlock: ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
+        cell.textLabel.text = item;
     }];
     
     [self startLocationService];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - Table View Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if ([[self.datasourceManager dataForIndexPath:indexPath] isKindOfClass:[CHDStop class]]) {
         return 65.0;
     }
     return tableView.rowHeight;
 }
 
-
-#pragma mark - Table View Delegate
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CHDStop *station = [self.datasourceManager dataForIndexPath:indexPath];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.didSelectStationBlock) {
-        self.didSelectStationBlock(station);
+    CHDStop *station;
+    switch (indexPath.section) {
+        case 0:
+            station = [self.datasourceManager dataForIndexPath:indexPath];
+    
+            if (self.didSelectStationBlock) {
+                self.didSelectStationBlock(station);
+            }
+            break;
+        case 1:
+            // check if contacts or favorits selected
+            break;
     }
 }
-
 
 #pragma mark - Location Service
 #pragma mark Current Location
@@ -111,6 +124,7 @@
             // get the stops for current location and show in table
             [CHDStop findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
                 self.datasourceManager.sectionsDatasource = @[[stops copy]];
+                //self.datasourceManager.sectionsDatasource = @[[stops copy],[_menuItems copy]];
             }];
         }
     }
