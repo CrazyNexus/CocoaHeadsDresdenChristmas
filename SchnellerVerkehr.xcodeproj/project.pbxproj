@@ -291,7 +291,7 @@
 			attributes = {
 				CLASSPREFIX = CHD;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = Couchfunk;
+				ORGANIZATIONNAME = "CocoaHeads Dresden";
 				TargetAttributes = {
 					0AA670001856533E003D300C = {
 						TestTargetID = 0AA66FDF1856533E003D300C;
