@@ -28,7 +28,7 @@
     self = [super initWithCoder:aDecoder];
 
     if (self) {
-        self.efaPlugin = [[CHDEFAPlugin alloc] init];
+        self.efaPlugin          = [[CHDEFAPlugin alloc] init];
         self.efaPlugin.delegate = self;
     }
     return self;

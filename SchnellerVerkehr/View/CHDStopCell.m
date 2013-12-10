@@ -10,8 +10,8 @@
 
 @interface CHDStopCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel    *distanceLabel;
 
 
 @end
@@ -21,7 +21,7 @@
 
 - (void)setupFromStop:(CHDStop *)stop {
     self.titleLabel.text    = stop.name;
-    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Meter",stop.distance];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Meter", (long)stop.distance];
 }
 
 @end
