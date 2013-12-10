@@ -79,7 +79,10 @@
 
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                //[self.delegate receivedStopsList:stops];
+                                
+                                if (completion) {
+                                    completion(trips);
+                                }
                             });
                         }
                     }

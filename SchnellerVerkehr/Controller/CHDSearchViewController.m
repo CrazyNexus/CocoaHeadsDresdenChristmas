@@ -11,7 +11,7 @@
 #import "CHDDatasourceManager.h"
 #import "CHDStopCell.h"
 
-@interface CHDSearchViewController () <UITextFieldDelegate>
+@interface CHDSearchViewController () <UITextFieldDelegate, UITableViewDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 
@@ -58,6 +58,18 @@
     }
     return tableView.rowHeight;
 }
+
+
+#pragma mark - Table View Delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CHDStop *station = [self.datasourceManager dataForIndexPath:indexPath];
+    
+    if (self.didSelectStationBlock) {
+        self.didSelectStationBlock(station);
+    }
+}
+
 
 #pragma mark - Location Service
 #pragma mark Current Location

@@ -13,6 +13,7 @@
 		0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF6185696C50002EF22 /* CHDLeg.m */; };
 		0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF918569FE20002EF22 /* NSObject+TypeChecks.m */; };
 		0A068FFD1856AFDE0002EF22 /* CHDTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FFC1856AFDE0002EF22 /* CHDTrip.m */; };
+		0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FFF18570A350002EF22 /* CHDTestSearchViewController.m */; };
 		0AA66FE41856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
 		0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE51856533E003D300C /* CoreGraphics.framework */; };
 		0AA66FE81856533E003D300C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE71856533E003D300C /* UIKit.framework */; };
@@ -55,6 +56,8 @@
 		0A068FF918569FE20002EF22 /* NSObject+TypeChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+TypeChecks.m"; path = "Helper/NSObject+TypeChecks.m"; sourceTree = "<group>"; };
 		0A068FFB1856AFDE0002EF22 /* CHDTrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDTrip.h; path = Model/CHDTrip.h; sourceTree = "<group>"; };
 		0A068FFC1856AFDE0002EF22 /* CHDTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDTrip.m; path = Model/CHDTrip.m; sourceTree = "<group>"; };
+		0A068FFE18570A350002EF22 /* CHDTestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDTestSearchViewController.h; path = Controller/CHDTestSearchViewController.h; sourceTree = "<group>"; };
+		0A068FFF18570A350002EF22 /* CHDTestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDTestSearchViewController.m; path = Controller/CHDTestSearchViewController.m; sourceTree = "<group>"; };
 		0AA66FE01856533E003D300C /* SchnellerVerkehr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchnellerVerkehr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AA66FE31856533E003D300C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0AA66FE51856533E003D300C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -110,6 +113,8 @@
 			children = (
 				B86712001856690800A97960 /* CHDSearchViewController.h */,
 				B86712011856690800A97960 /* CHDSearchViewController.m */,
+				0A068FFE18570A350002EF22 /* CHDTestSearchViewController.h */,
+				0A068FFF18570A350002EF22 /* CHDTestSearchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
+				0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,4 +16,5 @@
 
     #import <ReactiveCocoa/ReactiveCocoa.h>
     #import "NSObject+TypeChecks.h"
+    #import "CHDDatasourceManager.h"
 #endif
