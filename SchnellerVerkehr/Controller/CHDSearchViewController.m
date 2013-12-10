@@ -13,7 +13,7 @@
 #import "CHDEFAPlugin.h"
 #import "CHDStopListDelegate.h"
 
-@interface CHDSearchViewController () <CHDStopListDelegate>
+@interface CHDSearchViewController () <CHDStopListDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CHDEFAPlugin      *efaPlugin;
@@ -46,7 +46,6 @@
      subscribeNext: ^(NSString *name) {
          [self.efaPlugin findStopsWithName:name];
      }];
-
     
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
     
@@ -136,7 +135,8 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:currentLocation completionHandler: ^(NSArray *placemarks, NSError *error) {
         CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
-        _addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        self.destinationTextField.placeholder = [NSString stringWithFormat:@"%@, ", aPlacemark.name];
     }];
 }
 
@@ -144,6 +144,12 @@
 
 - (void)receivedStopsList:(NSArray *)stops {
     self.datasourceManager.sectionsDatasource = @[[stops copy]];
+}
+
+#pragma mark - UITextField Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.destinationTextField.text = self.destinationTextField.placeholder;
 }
 
 @end

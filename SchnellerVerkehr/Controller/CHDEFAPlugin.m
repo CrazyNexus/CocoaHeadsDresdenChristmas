@@ -20,7 +20,7 @@
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 
-    [[session   dataTaskWithURL     :[NSURL URLWithString:url]
+    [[session   dataTaskWithURL     :[NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]
                 completionHandler   : ^(NSData *data,
                                         NSURLResponse *response,
                                         NSError *error) {
@@ -44,18 +44,18 @@
 
                             for (NSDictionary * stopDict in stopList) {
                                 NSString *city = stopDict[@"ref"][@"place"];
-                                NSString *name = [[stopDict[@"name"] componentsSeparatedByString:@","] lastObject];
+                                NSString *name = [[[stopDict[@"name"] componentsSeparatedByString:@","] lastObject] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
                                 NSString *qualityString = stopDict[@"quality"];
                                 NSNumber *quality = [f numberFromString:qualityString];
                                 if (!quality) {
                                     quality = @0;
                                 }
 
-                                NSString *stopID = stopDict[@"ref"][@"id"];
+                                NSString *stopID = stopDict[@"stateless"];
 
                                 [temp addObject:@{ @"quality":quality, @"city":city, @"name":name, @"stopID":stopID }];
                                 [temp sortUsingComparator: ^NSComparisonResult (id obj1, id obj2) {
-                                    return [obj1[@"quality"] compare:obj2[@"quality"]];
+                                    return [obj2[@"quality"] compare:obj1[@"quality"]]; // biggest quality is best
                                 }];
                             }
 
