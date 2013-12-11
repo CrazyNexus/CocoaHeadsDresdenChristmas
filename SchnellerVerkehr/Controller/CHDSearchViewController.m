@@ -10,6 +10,7 @@
 #import "CHDStation.h"
 #import "CHDDatasourceManager.h"
 #import "CHDStationCell.h"
+#import "CHDMenueCell.h"
 
 @interface CHDSearchViewController () <UITextFieldDelegate, UITableViewDelegate>
 
@@ -18,15 +19,13 @@
 @property (nonatomic, strong) CHDDatasourceManager  *datasourceManager;
 @property (nonatomic, strong) NSArray               *menuItems;
 
-@property (nonatomic) BOOL                          showMore;
-
 @end
 
 @implementation CHDSearchViewController
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
-
+    
     if (self) {
     }
     return self;
@@ -34,9 +33,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     _menuItems = [[NSArray alloc] initWithObjects:@"Kontakte", @"Favorit", nil];
-
+    
     __weak CHDSearchViewController *weakSelf = self;
     [[self.destinationTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
@@ -48,17 +47,16 @@
              weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], [_menuItems copy]];
          }];
      }];
-
+    
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
     [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStation class] setupBlock: ^(CHDStationCell *cell, CHDStation *station, NSIndexPath *indexPath) {
         [cell setupFromStation:station];
     }];
-    [self.datasourceManager registerCellReuseIdentifier:@"MenuCell" forDataObject:[@"String" class] setupBlock: ^(UITableViewCell *cell, NSString *item, NSIndexPath *indexPath) {
-        cell.textLabel.text = item;
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_right"]];
-        cell.accessoryView = imageView;
+    [self.datasourceManager registerCellReuseIdentifier:@"MenuCell" forDataObject:[@"String" class] setupBlock: ^(CHDMenueCell *cell, NSString *item, NSIndexPath *indexPath) {
+        cell.menuItemLabel.text = item;
+        cell.menuItemImage.image = [UIImage imageNamed:@"arrow_right"];
     }];
-
+    
     [self startLocationService];
 }
 
@@ -72,18 +70,23 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CHDStation *station;
+    CHDStation      *station;
+    CHDMenueCell    *cell;
     switch (indexPath.section) {
         case 0:
             station = [self.datasourceManager dataForIndexPath:indexPath];
-
+            
             if (self.didSelectStationBlock) {
                 self.didSelectStationBlock(station);
             }
             break;
-
+            
         case 1:
-
+            cell = (CHDMenueCell *)[tableView cellForRowAtIndexPath:indexPath];
+            if (cell.menuItemImage.image == [UIImage imageNamed:@"arrow_right"])
+                cell.menuItemImage.image = [UIImage imageNamed:@"arrow_down"];
+            else
+                cell.menuItemImage.image = [UIImage imageNamed:@"arrow_right"];
             break;
     }
 }
@@ -121,10 +124,10 @@
             [manager stopUpdatingLocation];
             NSLog(@"Latitude: %f", location.coordinate.latitude);
             NSLog(@"Longitude: %f", location.coordinate.longitude);
-
+            
             // save new location values for further processing
             [self getStreetFromLocation:location];
-
+            
             // get the stops for current location and show in table
             [CHDStation findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
                 //self.datasourceManager.sectionsDatasource = @[[stops copy]];
@@ -171,5 +174,9 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.destinationTextField.text = self.destinationTextField.placeholder;
 }
+
+#pragma mark - Additional Information for Menu Items
+
+
 
 @end

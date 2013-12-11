@@ -30,6 +30,8 @@
 		B84A18361856700800A984D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A1837185677CD00A984D0 /* CoreLocation.framework */; };
 		B86712021856690800A97960 /* CHDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86712011856690800A97960 /* CHDSearchViewController.m */; };
+		B893D49F1858BAE70046BAEF /* CHDMenueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B893D49E1858BAE70046BAEF /* CHDMenueCell.m */; };
+		B893D4A21858C1A50046BAEF /* CHDContact.m in Sources */ = {isa = PBXBuildFile; fileRef = B893D4A11858C1A50046BAEF /* CHDContact.m */; };
 		B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */; };
 		B8A3AA511857658C00F9D72F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA501857658B00F9D72F /* AddressBook.framework */; };
 		B8A3AA531857659400F9D72F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA521857659400F9D72F /* AddressBookUI.framework */; };
@@ -84,6 +86,10 @@
 		B84A1837185677CD00A984D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
 		B86712011856690800A97960 /* CHDSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDSearchViewController.m; path = Controller/CHDSearchViewController.m; sourceTree = "<group>"; };
+		B893D49D1858BAE70046BAEF /* CHDMenueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDMenueCell.h; path = View/CHDMenueCell.h; sourceTree = "<group>"; };
+		B893D49E1858BAE70046BAEF /* CHDMenueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDMenueCell.m; path = View/CHDMenueCell.m; sourceTree = "<group>"; };
+		B893D4A01858C1A50046BAEF /* CHDContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDContact.h; path = Model/CHDContact.h; sourceTree = "<group>"; };
+		B893D4A11858C1A50046BAEF /* CHDContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDContact.m; path = Model/CHDContact.m; sourceTree = "<group>"; };
 		B8A3AA4D18574F5300F9D72F /* CHDContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDContactCell.h; path = View/CHDContactCell.h; sourceTree = "<group>"; };
 		B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDContactCell.m; path = View/CHDContactCell.m; sourceTree = "<group>"; };
 		B8A3AA501857658B00F9D72F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -143,6 +149,8 @@
 				0A068FFC1856AFDE0002EF22 /* CHDTrip.m */,
 				F92B798F1857CEE90089FBFA /* CHDStation.h */,
 				F92B79901857CEE90089FBFA /* CHDStation.m */,
+				B893D4A01858C1A50046BAEF /* CHDContact.h */,
+				B893D4A11858C1A50046BAEF /* CHDContact.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -154,6 +162,8 @@
 				0A068FF3185685DA0002EF22 /* CHDStationCell.m */,
 				B8A3AA4D18574F5300F9D72F /* CHDContactCell.h */,
 				B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */,
+				B893D49D1858BAE70046BAEF /* CHDMenueCell.h */,
+				B893D49E1858BAE70046BAEF /* CHDMenueCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -386,12 +396,14 @@
 				0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */,
 				0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */,
 				F92B79911857CEE90089FBFA /* CHDStation.m in Sources */,
+				B893D49F1858BAE70046BAEF /* CHDMenueCell.m in Sources */,
 				0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */,
 				B84A18361856700800A984D0 /* main.m in Sources */,
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
 				0A068FF4185685DA0002EF22 /* CHDStationCell.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
+				B893D4A21858C1A50046BAEF /* CHDContact.m in Sources */,
 				0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */,
 				B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */,
 				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
