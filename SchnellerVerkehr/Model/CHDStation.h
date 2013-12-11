@@ -17,7 +17,7 @@ typedef NS_ENUM (NSInteger, CHDStationType) {
     CHDStationTypeLoc,
     CHDStationTypeCoord, // used for own coordinates
     CHDStationTypeUnknown
-}
+};
 
 @interface CHDStation : NSObject
 

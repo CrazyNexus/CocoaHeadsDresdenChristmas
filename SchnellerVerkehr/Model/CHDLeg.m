@@ -64,8 +64,8 @@
 
             NSArray *coords = [stopDict[@"ref"][@"coords"] componentsSeparatedByString:@","];
             if ([coords count] == 2) {
-                station.location = [[CLLocation alloc]  initWithLatitude:[coords[1] floatValue] / 1000000.f
-                                                        longitude       :[coords[0] floatValue] / 1000000.f];
+                station.location = [[CLLocation alloc]  initWithLatitude:[coords[1] floatValue]
+                                                        longitude       :[coords[0] floatValue]];
             }
 
             CHDStop *stop = [[CHDStop alloc] initWithStation:station];

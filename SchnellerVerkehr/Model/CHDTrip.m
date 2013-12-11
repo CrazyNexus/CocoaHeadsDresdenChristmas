@@ -100,7 +100,7 @@
                      "&name_destination=%@"
                      "&type_destination=%@"
                      "&changeSpeed=normal"
-                     "&coordOutputFormat=WGS84"
+                     "&coordOutputFormat=WGS84[DD.ddddd]"
                      "&outputFormat=JSON",
                      (unsigned long)calcNumberOfTrips, originName, originType, destinationName, destinationType];
 

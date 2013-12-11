@@ -127,7 +127,7 @@
 
     NSString *url = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_COORD_REQUEST"
                      "?coord=%f:%f:WGS84"
-                     "&coordOutputFormat=WGS84"
+                     "&coordOutputFormat=WGS84[DD.ddddd]"
                      "&max=5"
                      "&inclFilter=1"
                      "&radius_1=1000"
