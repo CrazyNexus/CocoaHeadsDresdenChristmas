@@ -124,12 +124,18 @@
                         NSMutableArray *trips = [[NSMutableArray alloc] init];
 
                         if (!jsonError) {
+                            NSRegularExpression *re = [NSRegularExpression  regularExpressionWithPattern:@"^[0-5][0-9]:[0-5][0-9]$"
+                                                                            options                     :NSRegularExpressionAnchorsMatchLines
+                                                                            error                       :nil];
                             for (NSDictionary * tripDictionary in JSON[@"trips"]) {
-#warning needs to be fixed
-                                NSDateFormatter * df = [[NSDateFormatter alloc] init];
-                                df.dateFormat = @"mm:ss";
-                                NSDate *date = [df dateFromString:[tripDictionary valueForKeyPath:@"trip.duration"]];
-                                NSTimeInterval duration = [date timeIntervalSinceReferenceDate];
+                                NSTimeInterval duration;
+                                NSString *minSecDuration = [tripDictionary valueForKeyPath:@"trip.duration"];
+                                NSUInteger matches = [[re   matchesInString :minSecDuration
+                                                            options         :0
+                                                            range           :NSMakeRange(0, minSecDuration.length)] count];
+                                if (matches == 1) {
+                                    duration = [[minSecDuration componentsSeparatedByString:@":"][0] integerValue] * 60 + [[minSecDuration componentsSeparatedByString:@":"][1] integerValue];
+                                }
 
                                 NSInteger interchange = [[tripDictionary valueForKeyPath:@"trip.interchange"] integerValue];
                                 NSMutableArray *legs = [NSMutableArray array];
