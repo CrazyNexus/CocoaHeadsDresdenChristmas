@@ -8,18 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class CHDStop;
+@class CHDStation;
 
 typedef void (^TripSearchCompletionBlock)(NSArray *trips);
 
 @interface CHDTrip : NSObject
 
-@property (nonatomic) NSTimeInterval duration;
-@property (nonatomic) NSInteger interchange;
-@property (nonatomic) NSArray *legs;
+@property (nonatomic) NSTimeInterval    duration;
+@property (nonatomic) NSInteger         interchange;
+@property (nonatomic) NSArray           *legs;
 
-- (instancetype)initWithDuration:(NSTimeInterval)duration interchange:(NSInteger)interchange legs:(NSArray*)legs;
+- (instancetype)initWithDuration:(NSTimeInterval)duration interchange:(NSInteger)interchange legs:(NSArray *)legs;
 
-+ (void)findTripWithOrigin:(CHDStop *)origin destination:(CHDStop *)destination calcNumberOfTrips:(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion;
++ (void)findTripWithOrigin:(CHDStation *)origin destination:(CHDStation *)destination calcNumberOfTrips:(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion;
 
 @end

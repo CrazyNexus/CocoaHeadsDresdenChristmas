@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A068FED1856633B0002EF22 /* CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FEC1856633B0002EF22 /* CHDStop.m */; };
 		0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */; };
-		0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF3185685DA0002EF22 /* CHDStopCell.m */; };
+		0A068FF4185685DA0002EF22 /* CHDStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF3185685DA0002EF22 /* CHDStationCell.m */; };
 		0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF6185696C50002EF22 /* CHDLeg.m */; };
 		0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF918569FE20002EF22 /* NSObject+TypeChecks.m */; };
 		0A068FFD1856AFDE0002EF22 /* CHDTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FFC1856AFDE0002EF22 /* CHDTrip.m */; };
@@ -33,6 +33,8 @@
 		B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */; };
 		B8A3AA511857658C00F9D72F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA501857658B00F9D72F /* AddressBook.framework */; };
 		B8A3AA531857659400F9D72F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA521857659400F9D72F /* AddressBookUI.framework */; };
+		F92B79911857CEE90089FBFA /* CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F92B79901857CEE90089FBFA /* CHDStation.m */; };
+		F92B79921857CEE90089FBFA /* CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F92B79901857CEE90089FBFA /* CHDStation.m */; };
 		F94C2F4318565A8D003C0FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
@@ -51,8 +53,8 @@
 		0A068FEC1856633B0002EF22 /* CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStop.m; path = Model/CHDStop.m; sourceTree = "<group>"; };
 		0A068FEF185676CC0002EF22 /* CHDDatasourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDDatasourceManager.h; path = Helper/CHDDatasourceManager.h; sourceTree = "<group>"; };
 		0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDDatasourceManager.m; path = Helper/CHDDatasourceManager.m; sourceTree = "<group>"; };
-		0A068FF2185685DA0002EF22 /* CHDStopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStopCell.h; path = View/CHDStopCell.h; sourceTree = "<group>"; };
-		0A068FF3185685DA0002EF22 /* CHDStopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStopCell.m; path = View/CHDStopCell.m; sourceTree = "<group>"; };
+		0A068FF2185685DA0002EF22 /* CHDStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStationCell.h; path = View/CHDStationCell.h; sourceTree = "<group>"; };
+		0A068FF3185685DA0002EF22 /* CHDStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStationCell.m; path = View/CHDStationCell.m; sourceTree = "<group>"; };
 		0A068FF5185696C50002EF22 /* CHDLeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDLeg.h; path = Model/CHDLeg.h; sourceTree = "<group>"; };
 		0A068FF6185696C50002EF22 /* CHDLeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDLeg.m; path = Model/CHDLeg.m; sourceTree = "<group>"; };
 		0A068FF818569FE20002EF22 /* NSObject+TypeChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+TypeChecks.h"; path = "Helper/NSObject+TypeChecks.h"; sourceTree = "<group>"; };
@@ -87,6 +89,8 @@
 		B8A3AA501857658B00F9D72F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		B8A3AA521857659400F9D72F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F92B798F1857CEE90089FBFA /* CHDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStation.h; path = Model/CHDStation.h; sourceTree = "<group>"; };
+		F92B79901857CEE90089FBFA /* CHDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStation.m; path = Model/CHDStation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 				0A068FF6185696C50002EF22 /* CHDLeg.m */,
 				0A068FFB1856AFDE0002EF22 /* CHDTrip.h */,
 				0A068FFC1856AFDE0002EF22 /* CHDTrip.m */,
+				F92B798F1857CEE90089FBFA /* CHDStation.h */,
+				F92B79901857CEE90089FBFA /* CHDStation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -144,8 +150,8 @@
 		0A068FE91856579F0002EF22 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0A068FF2185685DA0002EF22 /* CHDStopCell.h */,
-				0A068FF3185685DA0002EF22 /* CHDStopCell.m */,
+				0A068FF2185685DA0002EF22 /* CHDStationCell.h */,
+				0A068FF3185685DA0002EF22 /* CHDStationCell.m */,
 				B8A3AA4D18574F5300F9D72F /* CHDContactCell.h */,
 				B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */,
 			);
@@ -379,11 +385,12 @@
 				0A068FFD1856AFDE0002EF22 /* CHDTrip.m in Sources */,
 				0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */,
 				0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */,
+				F92B79911857CEE90089FBFA /* CHDStation.m in Sources */,
 				0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */,
 				B84A18361856700800A984D0 /* main.m in Sources */,
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
 				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
-				0A068FF4185685DA0002EF22 /* CHDStopCell.m in Sources */,
+				0A068FF4185685DA0002EF22 /* CHDStationCell.m in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
 				0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */,
 				B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */,
@@ -395,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F92B79921857CEE90089FBFA /* CHDStation.m in Sources */,
 				0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

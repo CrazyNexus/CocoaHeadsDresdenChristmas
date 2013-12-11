@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 CocoaHeads Dresden. All rights reserved.
 //
 
-#import "CHDStopCell.h"
+#import "CHDStationCell.h"
 
-@interface CHDStopCell ()
+@interface CHDStationCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel    *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel    *distanceLabel;
@@ -18,9 +18,9 @@
 @end
 
 
-@implementation CHDStopCell
+@implementation CHDStationCell
 
-- (void)setupFromStop:(CHDStop *)stop {
+- (void)setupFromStation:(CHDStation *)stop {
     self.titleLabel.text    = stop.name;
     self.distanceLabel.text = [NSString stringWithFormat:@"%ld Meter", (long)stop.distance];
     self.cityLabel.text     = stop.city;

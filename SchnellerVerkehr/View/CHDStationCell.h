@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CHDStop.h"
+#import "CHDStation.h"
 
 
-@interface CHDStopCell : UITableViewCell
+@interface CHDStationCell : UITableViewCell
 
-- (void)setupFromStop:(CHDStop *)stop;
+- (void)setupFromStation:(CHDStation *)stop;
 
 @end

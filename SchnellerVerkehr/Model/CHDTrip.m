@@ -7,7 +7,7 @@
 //
 
 #import "CHDTrip.h"
-#import "CHDStop.h"
+#import "CHDStation.h"
 #import "CHDLeg.h"
 
 @implementation CHDTrip
@@ -22,40 +22,86 @@
     return self;
 }
 
-+ (void)findTripWithOrigin:(CHDStop *)origin destination:(CHDStop *)destination calcNumberOfTrips:(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion {
-    if (!origin.ID || !destination.ID) {
++ (void)findTripWithOrigin:(CHDStation *)origin destination:(CHDStation *)destination calcNumberOfTrips:(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion {
+    if (!origin.identifiable || !destination.identifiable) {
         if (completion) {
             completion(nil);
         }
         return;
     }
 
-    NSString    *originName         = origin.ID;
-    NSString    *originType         = @"stopID";
-    NSString    *destinationName    = destination.ID;
-    NSString    *destinationType    = @"stopID";
+    NSString    *originName;
+    NSString    *originType;
+    NSString    *destinationName;
+    NSString    *destinationType;
 
-    if ([origin.ID hasPrefix:@"poiID:"]) {
-        originName  = [origin.ID substringFromIndex:6];
-        originType  = @"poiID";
+    switch (origin.type) {
+        case CHDStationTypeStop:
+            originName  = origin.ID;
+            originType  = @"stopID";
+            break;
+
+        case CHDStationTypePOI:
+            originName  = [origin.ID substringFromIndex:6];
+            originType  = @"poiID";
+            break;
+
+        case CHDStationTypeLoc:
+#warning Locations/Places not working
+            originName  = [origin.ID substringFromIndex:8];
+            originType  = @"placeID";
+            break;
+
+        case CHDStationTypeCoord:
+            originName  = [NSString stringWithFormat:@"%f:%f:WGS84", origin.location.coordinate.longitude, origin.location.coordinate.latitude];
+            originType  = @"coord";
+            break;
+
+        default:
+            // lucky guess
+            originName  = origin.name;
+            originType  = @"any";
+            break;
     }
 
-    if ([destination.ID hasPrefix:@"poiID:"]) {
-        destinationName = [destination.ID substringFromIndex:6];
-        destinationType = @"poiID";
+    switch (destination.type) {
+        case CHDStationTypeStop:
+            destinationName = destination.ID;
+            destinationType = @"stopID";
+            break;
+
+        case CHDStationTypePOI:
+            destinationName = [destination.ID substringFromIndex:6];
+            destinationType = @"poiID";
+            break;
+
+        case CHDStationTypeLoc:
+            originName      = [origin.ID substringFromIndex:8];
+            destinationType = @"locID";
+            break;
+
+        case CHDStationTypeCoord:
+            destinationName = [NSString stringWithFormat:@"%f:%f:WGS84", destination.location.coordinate.longitude, destination.location.coordinate.latitude];
+            destinationType = @"coord";
+            break;
+
+        default:
+            destinationName = destination.name;
+            destinationType = @"any";
+            break;
     }
 
     NSString *url = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_TRIP_REQUEST2"
                      "?sessionID=0"
                      "&language=de"
                      "&calcNumberOfTrips=%lu"
-                     "&coordOutputFormat=none"
                      "&name_origin=%@"
                      "&type_origin=%@"
                      "&name_destination=%@"
                      "&type_destination=%@"
                      "&changeSpeed=normal"
-                     "&includedMeans=0&includedMeans=8&includedMeans=5&includedMeans=1&includedMeans=9&includedMeans=6&includedMeans=4&includedMeans=10&outputFormat=JSON",
+                     "&coordOutputFormat=WGS84"
+                     "&outputFormat=JSON",
                      (unsigned long)calcNumberOfTrips, originName, originType, destinationName, destinationType];
 
     NSURLSession *session = [NSURLSession sharedSession];
