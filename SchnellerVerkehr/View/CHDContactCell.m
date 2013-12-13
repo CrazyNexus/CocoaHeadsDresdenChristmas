@@ -10,7 +10,7 @@
 
 @implementation CHDContactCell
 
-- (void)setupFromStop:(NSString *)name {
+- (void)setupFromContact:(CHDContact *)contact {
 //    self.titleLabel.text    = stop.name;
 //    self.distanceLabel.text = [NSString stringWithFormat:@"%ld Meter", (long)stop.distance];
 //    self.cityLabel.text     = stop.city;

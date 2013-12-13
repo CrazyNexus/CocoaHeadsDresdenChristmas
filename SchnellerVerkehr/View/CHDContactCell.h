@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CHDContact.h"
 
 @interface CHDContactCell : UITableViewCell
 
-- (void)setupFromStop:(NSString *)name;
+- (void)setupFromContact:(CHDContact *)contact;
 
 @end

@@ -14,7 +14,7 @@ typedef NS_ENUM (NSInteger, CHDContactType) {
     CHDContactTypeFavorit,
 };
 
-@interface CHDContact : NSObject
+@interface CHDContact : NSObject <NSCoding>
 
 @property (nonatomic, assign) CHDContactType    type;
 @property (nonatomic, strong) NSString          *firstName;

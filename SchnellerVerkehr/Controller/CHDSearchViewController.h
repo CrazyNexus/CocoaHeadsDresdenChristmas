@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <AddressBookUI/AddressBookUI.h>
 #import "CHDStation.h"
 
 typedef void (^CHDSearchDidSelectStationBlock)(CHDStation *station);
 
-@interface CHDSearchViewController : UIViewController <UITableViewDelegate, CLLocationManagerDelegate>
+@interface CHDSearchViewController : UIViewController <UITableViewDelegate, CLLocationManagerDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField            *addressLabel;
 @property (weak, nonatomic) IBOutlet UITextField            *destinationTextField;
