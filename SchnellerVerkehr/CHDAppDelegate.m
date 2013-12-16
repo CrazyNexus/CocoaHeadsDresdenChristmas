@@ -10,6 +10,8 @@
 
 #import "CHDStation.h"
 #import "CHDTrip.h"
+#import "DDNSLoggerLogger.h"
+#import <CocoaLumberjack/DDTTYLogger.h>
 
 @implementation CHDAppDelegate
 
@@ -31,6 +33,11 @@
     //    [CHDTrip findTripWithOrigin:o destination:d calcNumberOfTrips:3 completion:^(NSArray *trips) {
     //        NSLog(@"Trips: %lu",(unsigned long)[trips count]);
     //    }];
+
+    [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [MagicalRecord setupCoreDataStackWithStoreNamed:kSQLiteStoreName];
+
 
     return YES;
 }
@@ -55,6 +62,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
 }
 
 @end

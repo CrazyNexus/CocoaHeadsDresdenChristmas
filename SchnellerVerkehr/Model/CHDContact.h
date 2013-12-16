@@ -7,16 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
 
-typedef NS_ENUM (NSInteger, CHDContactType) {
-    CHDContactTypeContact,
-    CHDContactTypeFavorit,
-};
+@class CLLocation;
 
-@interface CHDContact : NSObject <NSCoding>
+@interface CHDContact : NSObject
 
-@property (nonatomic, assign) CHDContactType    type;
 @property (nonatomic, strong) NSString          *firstName;
 @property (nonatomic, strong) NSString          *lastName;
 @property (nonatomic, strong) NSString          *street;

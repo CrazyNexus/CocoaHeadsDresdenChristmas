@@ -54,6 +54,9 @@
             [weakSelf.navigationController popViewControllerAnimated:YES];
         };
     }
+    if ([segue.identifier isEqualToString:@"showTripsSegue"]) {
+
+    }
 }
 
 #pragma mark - User Interaction
@@ -61,6 +64,7 @@
 - (IBAction)didTapSearchButton:(id)sender {
     [CHDTrip findTripWithOrigin:self.startStation destination:self.destinationStation calcNumberOfTrips:3 completion: ^(NSArray *trips) {
         NSLog(@"trips: %@", trips);
+        [self performSegueWithIdentifier:@"showTripsSegue" sender:self];
     }];
 }
 

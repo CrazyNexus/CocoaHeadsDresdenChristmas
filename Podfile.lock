@@ -1,15 +1,26 @@
 PODS:
-  - ReactiveCocoa (2.1.7):
+  - CocoaLumberjack (1.6.5.1):
+    - CocoaLumberjack/Core
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.6.5.1)
+  - CocoaLumberjack/Extensions (1.6.5.1):
+    - CocoaLumberjack/Core
+  - MagicalRecord (2.2)
+  - ReactiveCocoa (2.1.8):
     - ReactiveCocoa/Core
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/Core (2.1.7):
+  - ReactiveCocoa/Core (2.1.8):
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.1.7)
+  - ReactiveCocoa/no-arc (2.1.8)
 
 DEPENDENCIES:
-  - ReactiveCocoa
+  - CocoaLumberjack (~> 1.6.5.1)
+  - MagicalRecord (~> 2.2)
+  - ReactiveCocoa (~> 2.1.8)
 
 SPEC CHECKSUMS:
-  ReactiveCocoa: 1117f7968c8667d2ca00b5aa47156fabcb56af75
+  CocoaLumberjack: 17803afbade3126a377d32b8d23367264b44ced6
+  MagicalRecord: b1fc46c99a9749fe7fe7e6f43a89b62ef5201933
+  ReactiveCocoa: 0db710a0afa1c627a64470e5c912a3870d4854ae
 
 COCOAPODS: 0.28.0

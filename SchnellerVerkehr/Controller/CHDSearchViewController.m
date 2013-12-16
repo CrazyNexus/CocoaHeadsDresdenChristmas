@@ -13,9 +13,8 @@
 #import "CHDMenueCell.h"
 #import "CHDContactCell.h"
 #import "CHDContact.h"
-
-static NSString *kContactFile = @"CHDContacts.plist";
-static NSString *kFavoritFile = @"CHDFavorits.plist";
+#import "CHDTrip.h"
+#import "CHDTripCell.h"
 
 @interface CHDSearchViewController () <UITextFieldDelegate, UITableViewDelegate>
 
@@ -23,28 +22,23 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
 
 @property (nonatomic, strong) CHDDatasourceManager  *datasourceManager;
 @property (nonatomic, strong) NSMutableArray        *contactItems;
-@property (nonatomic, strong) NSMutableArray        *favoritItems;
+@property (nonatomic, strong) NSMutableArray        *favoriteItems;
 
 @end
 
 @implementation CHDSearchViewController
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    if (self) {
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    self.navigationController.navigationBar.hidden = YES;
+
     // two new buttons in the navigation bar
-    UIBarButtonItem *addressButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(selectBookmark)];
-    UIBarButtonItem *favoritButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Favorit"] style:UIBarButtonItemStyleBordered target:self action:@selector(saveFavorit)];
-    self.navigationItem.rightBarButtonItems = @[addressButton, favoritButton];
-    
+//    UIBarButtonItem *addressButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(selectBookmark)];
+//    UIBarButtonItem *favoritButton  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Favorit"] style:UIBarButtonItemStyleBordered target:self action:@selector(saveFavorite)];
+//    self.navigationItem.rightBarButtonItems = @[addressButton, favoritButton];
+
     __weak CHDSearchViewController *weakSelf = self;
     [[self.destinationTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
@@ -52,11 +46,10 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
       }]
      subscribeNext: ^(NSString *name) {
          [CHDStation findByName:name completion: ^(NSArray *stops) {
-             //weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
-             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], _contactItems, _favoritItems];
+             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
          }];
      }];
-    
+
     self.datasourceManager = [CHDDatasourceManager managerForTableView:self.tableView];
     [self.datasourceManager registerCellReuseIdentifier:@"StopCell" forDataObject:[CHDStation class] setupBlock: ^(CHDStationCell *cell, CHDStation *station, NSIndexPath *indexPath) {
         [cell setupFromStation:station];
@@ -65,15 +58,15 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
         cell.menuItemLabel.text = item;
         cell.menuItemImage.image = [UIImage imageNamed:@"arrow_right"];
     }];
-    [self.datasourceManager registerCellReuseIdentifier:@"ContactCell" forDataObject:[CHDContact class] setupBlock:^(CHDContactCell *cell, CHDContact *contact, NSIndexPath *indexPath) {
+    [self.datasourceManager registerCellReuseIdentifier:@"ContactCell" forDataObject:[CHDContact class] setupBlock: ^(CHDContactCell *cell, CHDContact *contact, NSIndexPath *indexPath) {
         [cell setupFromContact:contact];
     }];
-    
+    [self.datasourceManager registerCellReuseIdentifier:@"TripCell" forDataObject:[CHDTrip class] setupBlock: ^(CHDTripCell *cell, CHDTrip *trip, NSIndexPath *indexPath) {
+        [cell setupFromTrip:trip];
+    }];
+
     [self startLocationService];
-    
-    // load saved contacts and favorits
-    _contactItems = [self loadArrayFromFile:kContactFile];
-    _favoritItems = [self loadArrayFromFile:kFavoritFile];
+
 }
 
 #pragma mark - Table View Delegate
@@ -86,12 +79,12 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CHDStation      *station;
+    CHDStation *station;
 
     switch (indexPath.section) {
         case 0:
             station = [self.datasourceManager dataForIndexPath:indexPath];
-            
+
             if (self.didSelectStationBlock) {
                 self.didSelectStationBlock(station);
             }
@@ -101,17 +94,16 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
             [self tableView:tableView changeImageInMenuCellAtIndexPath:indexPath];
             [self extendValuesForContactsinTableView:tableView forIndexPath:indexPath];
             break;
-            
+
         case 2:
             [self tableView:tableView changeImageInMenuCellAtIndexPath:indexPath];
             break;
     }
 }
 
--(void)tableView:(UITableView *)tableView changeImageInMenuCellAtIndexPath:(NSIndexPath *)indexPath {
-    
+- (void)tableView:(UITableView *)tableView changeImageInMenuCellAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        CHDMenueCell    *cell;
+        CHDMenueCell *cell;
         cell = (CHDMenueCell *)[tableView cellForRowAtIndexPath:indexPath];
         if (cell.menuItemImage.image == [UIImage imageNamed:@"arrow_right"])
             cell.menuItemImage.image = [UIImage imageNamed:@"arrow_down"];
@@ -143,7 +135,7 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *location = [locations lastObject];
     if (signbit(location.horizontalAccuracy)) {
-        NSLog(@"Accuracity is negative, coordinates are not avaliable");
+        DDLogWarn(@"Accuracity is negative, coordinates are not avaliable");
     }
     else {
         NSDate          *eventDate  = location.timestamp;
@@ -151,16 +143,15 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
         if (howRecent < -0.0 && howRecent > -10.0) {
             // Positionsbestimmung stoppen
             [manager stopUpdatingLocation];
-            NSLog(@"Latitude: %f", location.coordinate.latitude);
-            NSLog(@"Longitude: %f", location.coordinate.longitude);
-            
+            DDLogVerbose(@"Latitude: %f", location.coordinate.latitude);
+            DDLogVerbose(@"Longitude: %f", location.coordinate.longitude);
+
             // save new location values for further processing
             [self getStreetFromLocation:location];
-            
+
             // get the stops for current location and show in table
             [CHDStation findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
-                //self.datasourceManager.sectionsDatasource = @[[stops copy]];
-                self.datasourceManager.sectionsDatasource = @[[stops copy], _contactItems, _favoritItems];
+                self.datasourceManager.sectionsDatasource = @[[stops copy]];
             }];
         }
     }
@@ -193,102 +184,73 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:currentLocation completionHandler: ^(NSArray *placemarks, NSError *error) {
         CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
-        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
-        self.destinationTextField.placeholder = [NSString stringWithFormat:@"%@, %@", aPlacemark.name, aPlacemark.locality];
+//        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        self.startTextField.placeholder = [NSString stringWithFormat:@"%@, %@", aPlacemark.name, aPlacemark.locality];
+        self.startTextField.rightViewMode = UITextFieldViewModeAlways;
+        self.startTextField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"geolocation"]];
     }];
 }
 
 #pragma mark - UITextField Delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.destinationTextField.text = self.destinationTextField.placeholder;
+//    self.destinationTextField.text = self.destinationTextField.placeholder;
 }
 
-#pragma mark - Additional Information for Menu Items
-
--(BOOL)saveArray:(NSArray *)data inFile:(NSString *)fileName {
-    NSString *docPath   = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath  = [docPath stringByAppendingPathComponent:fileName];
-    return [NSKeyedArchiver archiveRootObject:data toFile:filePath];
-}
-
--(NSMutableArray *)loadArrayFromFile:(NSString *)fileName {
-    NSMutableArray *data;
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *docPath          = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath         = [docPath stringByAppendingPathComponent:fileName];
-    if ([fileManager fileExistsAtPath:filePath])
-        data = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    else {
-        data = [[NSMutableArray alloc] init];
-        if ([fileName isEqualToString:kContactFile])
-            [data addObject:@"Kontakt"];
-        else
-            [data addObject:@"Favoriten"];
-    }
-    
-    return data;
-}
-
--(void)selectBookmark {
+- (void)selectBookmark {
     ABPeoplePickerNavigationController *peoplePicker = [[ABPeoplePickerNavigationController alloc] init];
     peoplePicker.peoplePickerDelegate = self;
     [self presentViewController:peoplePicker animated:YES completion:NULL];
-    
 }
 
--(void)saveFavorit {
-    
+- (void)saveFavorite {
 }
 
--(void)extendValuesForContactsinTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath {
+- (void)extendValuesForContactsinTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath {
     if ([_contactItems count] == 1) {
         [_contactItems addObjectsFromArray:_contactItems];
         [tableView reloadData];
         [self tableView:tableView changeImageInMenuCellAtIndexPath:indexPath];
     }
     else {
-        //[_contactItems removeObjectAtIndex:1];
         [tableView reloadData];
     }
 }
 
-#pragma mark - People Picker Delegate 
+#pragma mark - People Picker Delegate
 
--(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
+- (void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
--(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
-    
-    CHDContact *newContact  = [[CHDContact alloc] init];
-    newContact.type         = CHDContactTypeContact;
+- (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person {
+    CHDContact *newContact = [[CHDContact alloc] init];
     newContact.firstName    = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonFirstNameProperty);
     newContact.lastName     = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonLastNameProperty);
-    
+
     ABMultiValueRef addresses;
     addresses = ABRecordCopyValue(person, kABPersonAddressProperty);
 
     if (ABMultiValueGetCount(addresses) > 0) {
         CFDictionaryRef address = ABMultiValueCopyValueAtIndex(addresses, 0);
-        newContact.street = (__bridge_transfer NSString *)CFDictionaryGetValue(address, kABPersonAddressStreetKey);
-        newContact.city   = (__bridge_transfer NSString *)CFDictionaryGetValue(address, kABPersonAddressCityKey);
-    
+        newContact.street   = (__bridge_transfer NSString *)CFDictionaryGetValue(address, kABPersonAddressStreetKey);
+        newContact.city     = (__bridge_transfer NSString *)CFDictionaryGetValue(address, kABPersonAddressCityKey);
+
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressDictionary:CFBridgingRelease(address) completionHandler:^(NSArray *placemarks, NSError *error) {
+        [geocoder geocodeAddressDictionary:CFBridgingRelease(address) completionHandler: ^(NSArray *placemarks, NSError *error) {
             if (!error) {
                 CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                NSLog(@"%f, %f", placemark.location.coordinate.latitude, placemark.location.coordinate.longitude);
+                DDLogVerbose(@"%f, %f", placemark.location.coordinate.latitude, placemark.location.coordinate.longitude);
                 newContact.location = placemark.location;
             }
             else {
-                NSLog(@"Goocoding error: %@", [error localizedDescription]);
+                DDLogError(@"Goocoding error: %@", [error localizedDescription]);
             }
         }];
     }
-    
+
     [_contactItems addObject:newContact];
-    
+
     [self dismissViewControllerAnimated:YES completion:NULL];
     [_tableView reloadData];
     return NO;
@@ -299,7 +261,7 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
     return NO;
 }
 
--(BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
+- (BOOL)personViewController:(ABPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier {
     return NO;
 }
 

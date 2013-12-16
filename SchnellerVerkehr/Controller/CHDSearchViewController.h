@@ -15,8 +15,8 @@ typedef void (^CHDSearchDidSelectStationBlock)(CHDStation *station);
 
 @interface CHDSearchViewController : UIViewController <UITableViewDelegate, CLLocationManagerDelegate, ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, UINavigationControllerDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField            *addressLabel;
 @property (weak, nonatomic) IBOutlet UITextField            *destinationTextField;
+@property (weak, nonatomic) IBOutlet UITextField            *startTextField;
 @property (weak, nonatomic) IBOutlet UITableView            *tableView;
 
 @property (nonatomic, copy) CHDSearchDidSelectStationBlock  didSelectStationBlock;

@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A068FED1856633B0002EF22 /* CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FEC1856633B0002EF22 /* CHDStop.m */; };
 		0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */; };
 		0A068FF4185685DA0002EF22 /* CHDStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF3185685DA0002EF22 /* CHDStationCell.m */; };
-		0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF6185696C50002EF22 /* CHDLeg.m */; };
 		0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FF918569FE20002EF22 /* NSObject+TypeChecks.m */; };
-		0A068FFD1856AFDE0002EF22 /* CHDTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FFC1856AFDE0002EF22 /* CHDTrip.m */; };
 		0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A068FFF18570A350002EF22 /* CHDTestSearchViewController.m */; };
 		0AA66FE41856533E003D300C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE31856533E003D300C /* Foundation.framework */; };
 		0AA66FE61856533E003D300C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AA66FE51856533E003D300C /* CoreGraphics.framework */; };
@@ -27,6 +24,27 @@
 		0AA6700D1856533E003D300C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0AA6700B1856533E003D300C /* InfoPlist.strings */; };
 		0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */; };
 		17A4920B79BB42AB9D359B8E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93104B392286435796794338 /* libPods.a */; };
+		73A3304D185E530300AA7AF1 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3304C185E530200AA7AF1 /* Constants.m */; };
+		73A33053185E5A8A00AA7AF1 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 73A33051185E5A8A00AA7AF1 /* Model.xcdatamodeld */; };
+		73A33075185E5B0300AA7AF1 /* _CHDCarType.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33056185E5B0300AA7AF1 /* _CHDCarType.m */; };
+		73A33076185E5B0300AA7AF1 /* _CHDCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33058185E5B0300AA7AF1 /* _CHDCity.m */; };
+		73A33077185E5B0300AA7AF1 /* _CHDFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3305A185E5B0300AA7AF1 /* _CHDFavorite.m */; };
+		73A33078185E5B0300AA7AF1 /* _CHDLeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3305C185E5B0300AA7AF1 /* _CHDLeg.m */; };
+		73A33079185E5B0300AA7AF1 /* _CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3305E185E5B0300AA7AF1 /* _CHDStation.m */; };
+		73A3307A185E5B0300AA7AF1 /* _CHDStationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33060185E5B0300AA7AF1 /* _CHDStationType.m */; };
+		73A3307B185E5B0300AA7AF1 /* _CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33062185E5B0300AA7AF1 /* _CHDStop.m */; };
+		73A3307C185E5B0300AA7AF1 /* _CHDTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33064185E5B0300AA7AF1 /* _CHDTrip.m */; };
+		73A3307D185E5B0300AA7AF1 /* CHDCarType.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33066185E5B0300AA7AF1 /* CHDCarType.m */; };
+		73A3307E185E5B0300AA7AF1 /* CHDCity.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33068185E5B0300AA7AF1 /* CHDCity.m */; };
+		73A3307F185E5B0300AA7AF1 /* CHDFavorite.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3306A185E5B0300AA7AF1 /* CHDFavorite.m */; };
+		73A33080185E5B0300AA7AF1 /* CHDLeg.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3306C185E5B0300AA7AF1 /* CHDLeg.m */; };
+		73A33081185E5B0300AA7AF1 /* CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A3306E185E5B0300AA7AF1 /* CHDStation.m */; };
+		73A33082185E5B0300AA7AF1 /* CHDStationType.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33070185E5B0300AA7AF1 /* CHDStationType.m */; };
+		73A33083185E5B0300AA7AF1 /* CHDStop.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33072185E5B0300AA7AF1 /* CHDStop.m */; };
+		73A33084185E5B0300AA7AF1 /* CHDTrip.m in Sources */ = {isa = PBXBuildFile; fileRef = 73A33074185E5B0300AA7AF1 /* CHDTrip.m */; };
+		73E53CBC185E7FCC001372F5 /* CHDTripCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E53CBB185E7FCC001372F5 /* CHDTripCell.m */; };
+		73E53CC1185E8700001372F5 /* LoggerClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E53CBE185E8700001372F5 /* LoggerClient.m */; };
+		73E53CC2185E8700001372F5 /* DDNSLoggerLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 73E53CC0185E8700001372F5 /* DDNSLoggerLogger.m */; };
 		B84A18361856700800A984D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AA66FEF1856533E003D300C /* main.m */; };
 		B84A1838185677CD00A984D0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B84A1837185677CD00A984D0 /* CoreLocation.framework */; };
 		B86712021856690800A97960 /* CHDSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B86712011856690800A97960 /* CHDSearchViewController.m */; };
@@ -35,9 +53,6 @@
 		B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */; };
 		B8A3AA511857658C00F9D72F /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA501857658B00F9D72F /* AddressBook.framework */; };
 		B8A3AA531857659400F9D72F /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8A3AA521857659400F9D72F /* AddressBookUI.framework */; };
-		F92B79911857CEE90089FBFA /* CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F92B79901857CEE90089FBFA /* CHDStation.m */; };
-		F92B79921857CEE90089FBFA /* CHDStation.m in Sources */ = {isa = PBXBuildFile; fileRef = F92B79901857CEE90089FBFA /* CHDStation.m */; };
-		F94C2F4318565A8D003C0FC6 /* (null) in Sources */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,18 +66,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A068FEB1856633B0002EF22 /* CHDStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStop.h; path = Model/CHDStop.h; sourceTree = "<group>"; };
-		0A068FEC1856633B0002EF22 /* CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStop.m; path = Model/CHDStop.m; sourceTree = "<group>"; };
 		0A068FEF185676CC0002EF22 /* CHDDatasourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDDatasourceManager.h; path = Helper/CHDDatasourceManager.h; sourceTree = "<group>"; };
 		0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDDatasourceManager.m; path = Helper/CHDDatasourceManager.m; sourceTree = "<group>"; };
 		0A068FF2185685DA0002EF22 /* CHDStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStationCell.h; path = View/CHDStationCell.h; sourceTree = "<group>"; };
 		0A068FF3185685DA0002EF22 /* CHDStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStationCell.m; path = View/CHDStationCell.m; sourceTree = "<group>"; };
-		0A068FF5185696C50002EF22 /* CHDLeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDLeg.h; path = Model/CHDLeg.h; sourceTree = "<group>"; };
-		0A068FF6185696C50002EF22 /* CHDLeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDLeg.m; path = Model/CHDLeg.m; sourceTree = "<group>"; };
 		0A068FF818569FE20002EF22 /* NSObject+TypeChecks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+TypeChecks.h"; path = "Helper/NSObject+TypeChecks.h"; sourceTree = "<group>"; };
 		0A068FF918569FE20002EF22 /* NSObject+TypeChecks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+TypeChecks.m"; path = "Helper/NSObject+TypeChecks.m"; sourceTree = "<group>"; };
-		0A068FFB1856AFDE0002EF22 /* CHDTrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDTrip.h; path = Model/CHDTrip.h; sourceTree = "<group>"; };
-		0A068FFC1856AFDE0002EF22 /* CHDTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDTrip.m; path = Model/CHDTrip.m; sourceTree = "<group>"; };
 		0A068FFE18570A350002EF22 /* CHDTestSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDTestSearchViewController.h; path = Controller/CHDTestSearchViewController.h; sourceTree = "<group>"; };
 		0A068FFF18570A350002EF22 /* CHDTestSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDTestSearchViewController.m; path = Controller/CHDTestSearchViewController.m; sourceTree = "<group>"; };
 		0AA66FE01856533E003D300C /* SchnellerVerkehr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchnellerVerkehr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +91,48 @@
 		0AA6700A1856533E003D300C /* SchnellerVerkehrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SchnellerVerkehrTests-Info.plist"; sourceTree = "<group>"; };
 		0AA6700C1856533E003D300C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AA6700E1856533E003D300C /* SchnellerVerkehrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchnellerVerkehrTests.m; sourceTree = "<group>"; };
+		73A3304B185E530200AA7AF1 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		73A3304C185E530200AA7AF1 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		73A33052185E5A8A00AA7AF1 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		73A33055185E5B0300AA7AF1 /* _CHDCarType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDCarType.h; sourceTree = "<group>"; };
+		73A33056185E5B0300AA7AF1 /* _CHDCarType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDCarType.m; sourceTree = "<group>"; };
+		73A33057185E5B0300AA7AF1 /* _CHDCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDCity.h; sourceTree = "<group>"; };
+		73A33058185E5B0300AA7AF1 /* _CHDCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDCity.m; sourceTree = "<group>"; };
+		73A33059185E5B0300AA7AF1 /* _CHDFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDFavorite.h; sourceTree = "<group>"; };
+		73A3305A185E5B0300AA7AF1 /* _CHDFavorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDFavorite.m; sourceTree = "<group>"; };
+		73A3305B185E5B0300AA7AF1 /* _CHDLeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDLeg.h; sourceTree = "<group>"; };
+		73A3305C185E5B0300AA7AF1 /* _CHDLeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDLeg.m; sourceTree = "<group>"; };
+		73A3305D185E5B0300AA7AF1 /* _CHDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDStation.h; sourceTree = "<group>"; };
+		73A3305E185E5B0300AA7AF1 /* _CHDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDStation.m; sourceTree = "<group>"; };
+		73A3305F185E5B0300AA7AF1 /* _CHDStationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDStationType.h; sourceTree = "<group>"; };
+		73A33060185E5B0300AA7AF1 /* _CHDStationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDStationType.m; sourceTree = "<group>"; };
+		73A33061185E5B0300AA7AF1 /* _CHDStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDStop.h; sourceTree = "<group>"; };
+		73A33062185E5B0300AA7AF1 /* _CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDStop.m; sourceTree = "<group>"; };
+		73A33063185E5B0300AA7AF1 /* _CHDTrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CHDTrip.h; sourceTree = "<group>"; };
+		73A33064185E5B0300AA7AF1 /* _CHDTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CHDTrip.m; sourceTree = "<group>"; };
+		73A33065185E5B0300AA7AF1 /* CHDCarType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDCarType.h; sourceTree = "<group>"; };
+		73A33066185E5B0300AA7AF1 /* CHDCarType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDCarType.m; sourceTree = "<group>"; };
+		73A33067185E5B0300AA7AF1 /* CHDCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDCity.h; sourceTree = "<group>"; };
+		73A33068185E5B0300AA7AF1 /* CHDCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDCity.m; sourceTree = "<group>"; };
+		73A33069185E5B0300AA7AF1 /* CHDFavorite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDFavorite.h; sourceTree = "<group>"; };
+		73A3306A185E5B0300AA7AF1 /* CHDFavorite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDFavorite.m; sourceTree = "<group>"; };
+		73A3306B185E5B0300AA7AF1 /* CHDLeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDLeg.h; sourceTree = "<group>"; };
+		73A3306C185E5B0300AA7AF1 /* CHDLeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDLeg.m; sourceTree = "<group>"; };
+		73A3306D185E5B0300AA7AF1 /* CHDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDStation.h; sourceTree = "<group>"; };
+		73A3306E185E5B0300AA7AF1 /* CHDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDStation.m; sourceTree = "<group>"; };
+		73A3306F185E5B0300AA7AF1 /* CHDStationType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDStationType.h; sourceTree = "<group>"; };
+		73A33070185E5B0300AA7AF1 /* CHDStationType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDStationType.m; sourceTree = "<group>"; };
+		73A33071185E5B0300AA7AF1 /* CHDStop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDStop.h; sourceTree = "<group>"; };
+		73A33072185E5B0300AA7AF1 /* CHDStop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDStop.m; sourceTree = "<group>"; };
+		73A33073185E5B0300AA7AF1 /* CHDTrip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHDTrip.h; sourceTree = "<group>"; };
+		73A33074185E5B0300AA7AF1 /* CHDTrip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHDTrip.m; sourceTree = "<group>"; };
+		73E53CBA185E7FCC001372F5 /* CHDTripCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDTripCell.h; path = View/CHDTripCell.h; sourceTree = "<group>"; };
+		73E53CBB185E7FCC001372F5 /* CHDTripCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDTripCell.m; path = View/CHDTripCell.m; sourceTree = "<group>"; };
+		73E53CBD185E8700001372F5 /* LoggerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerClient.h; sourceTree = "<group>"; };
+		73E53CBE185E8700001372F5 /* LoggerClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerClient.m; sourceTree = "<group>"; };
+		73E53CBF185E8700001372F5 /* DDNSLoggerLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNSLoggerLogger.h; sourceTree = "<group>"; };
+		73E53CC0185E8700001372F5 /* DDNSLoggerLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDNSLoggerLogger.m; sourceTree = "<group>"; };
+		73E53CC4185E89E4001372F5 /* LoggerCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggerCommon.h; sourceTree = "<group>"; };
 		93104B392286435796794338 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84A1837185677CD00A984D0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B86712001856690800A97960 /* CHDSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDSearchViewController.h; path = Controller/CHDSearchViewController.h; sourceTree = "<group>"; };
@@ -95,8 +146,6 @@
 		B8A3AA501857658B00F9D72F /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		B8A3AA521857659400F9D72F /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		F801DF6979784538A91CB343 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		F92B798F1857CEE90089FBFA /* CHDStation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHDStation.h; path = Model/CHDStation.h; sourceTree = "<group>"; };
-		F92B79901857CEE90089FBFA /* CHDStation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHDStation.m; path = Model/CHDStation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,14 +190,8 @@
 		0A068FE81856579A0002EF22 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				0A068FEB1856633B0002EF22 /* CHDStop.h */,
-				0A068FEC1856633B0002EF22 /* CHDStop.m */,
-				0A068FF5185696C50002EF22 /* CHDLeg.h */,
-				0A068FF6185696C50002EF22 /* CHDLeg.m */,
-				0A068FFB1856AFDE0002EF22 /* CHDTrip.h */,
-				0A068FFC1856AFDE0002EF22 /* CHDTrip.m */,
-				F92B798F1857CEE90089FBFA /* CHDStation.h */,
-				F92B79901857CEE90089FBFA /* CHDStation.m */,
+				73A33054185E5B0300AA7AF1 /* Classes */,
+				73A33051185E5A8A00AA7AF1 /* Model.xcdatamodeld */,
 				B893D4A01858C1A50046BAEF /* CHDContact.h */,
 				B893D4A11858C1A50046BAEF /* CHDContact.m */,
 			);
@@ -164,6 +207,8 @@
 				B8A3AA4E18574F5300F9D72F /* CHDContactCell.m */,
 				B893D49D1858BAE70046BAEF /* CHDMenueCell.h */,
 				B893D49E1858BAE70046BAEF /* CHDMenueCell.m */,
+				73E53CBA185E7FCC001372F5 /* CHDTripCell.h */,
+				73E53CBB185E7FCC001372F5 /* CHDTripCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -171,6 +216,7 @@
 		0A068FEA1856602E0002EF22 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				73E53CC3185E8708001372F5 /* DDLog */,
 				0A068FEF185676CC0002EF22 /* CHDDatasourceManager.h */,
 				0A068FF0185676CC0002EF22 /* CHDDatasourceManager.m */,
 				0A068FF818569FE20002EF22 /* NSObject+TypeChecks.h */,
@@ -220,6 +266,8 @@
 				0AA66FF21856533E003D300C /* CHDAppDelegate.h */,
 				0AA66FF31856533E003D300C /* CHDAppDelegate.m */,
 				0AA66FF51856533E003D300C /* Main.storyboard */,
+				73A3304B185E530200AA7AF1 /* Constants.h */,
+				73A3304C185E530200AA7AF1 /* Constants.m */,
 				0A068FE7185657900002EF22 /* Controller */,
 				0A068FE81856579A0002EF22 /* Model */,
 				0A068FE91856579F0002EF22 /* View */,
@@ -257,6 +305,58 @@
 				0AA6700B1856533E003D300C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		73A33054185E5B0300AA7AF1 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				73A33055185E5B0300AA7AF1 /* _CHDCarType.h */,
+				73A33056185E5B0300AA7AF1 /* _CHDCarType.m */,
+				73A33057185E5B0300AA7AF1 /* _CHDCity.h */,
+				73A33058185E5B0300AA7AF1 /* _CHDCity.m */,
+				73A33059185E5B0300AA7AF1 /* _CHDFavorite.h */,
+				73A3305A185E5B0300AA7AF1 /* _CHDFavorite.m */,
+				73A3305B185E5B0300AA7AF1 /* _CHDLeg.h */,
+				73A3305C185E5B0300AA7AF1 /* _CHDLeg.m */,
+				73A3305D185E5B0300AA7AF1 /* _CHDStation.h */,
+				73A3305E185E5B0300AA7AF1 /* _CHDStation.m */,
+				73A3305F185E5B0300AA7AF1 /* _CHDStationType.h */,
+				73A33060185E5B0300AA7AF1 /* _CHDStationType.m */,
+				73A33061185E5B0300AA7AF1 /* _CHDStop.h */,
+				73A33062185E5B0300AA7AF1 /* _CHDStop.m */,
+				73A33063185E5B0300AA7AF1 /* _CHDTrip.h */,
+				73A33064185E5B0300AA7AF1 /* _CHDTrip.m */,
+				73A33065185E5B0300AA7AF1 /* CHDCarType.h */,
+				73A33066185E5B0300AA7AF1 /* CHDCarType.m */,
+				73A33067185E5B0300AA7AF1 /* CHDCity.h */,
+				73A33068185E5B0300AA7AF1 /* CHDCity.m */,
+				73A33069185E5B0300AA7AF1 /* CHDFavorite.h */,
+				73A3306A185E5B0300AA7AF1 /* CHDFavorite.m */,
+				73A3306B185E5B0300AA7AF1 /* CHDLeg.h */,
+				73A3306C185E5B0300AA7AF1 /* CHDLeg.m */,
+				73A3306D185E5B0300AA7AF1 /* CHDStation.h */,
+				73A3306E185E5B0300AA7AF1 /* CHDStation.m */,
+				73A3306F185E5B0300AA7AF1 /* CHDStationType.h */,
+				73A33070185E5B0300AA7AF1 /* CHDStationType.m */,
+				73A33071185E5B0300AA7AF1 /* CHDStop.h */,
+				73A33072185E5B0300AA7AF1 /* CHDStop.m */,
+				73A33073185E5B0300AA7AF1 /* CHDTrip.h */,
+				73A33074185E5B0300AA7AF1 /* CHDTrip.m */,
+			);
+			name = Classes;
+			path = Model/Classes;
+			sourceTree = "<group>";
+		};
+		73E53CC3185E8708001372F5 /* DDLog */ = {
+			isa = PBXGroup;
+			children = (
+				73E53CBD185E8700001372F5 /* LoggerClient.h */,
+				73E53CBE185E8700001372F5 /* LoggerClient.m */,
+				73E53CC4185E89E4001372F5 /* LoggerCommon.h */,
+				73E53CBF185E8700001372F5 /* DDNSLoggerLogger.h */,
+				73E53CC0185E8700001372F5 /* DDNSLoggerLogger.m */,
+			);
+			name = DDLog;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,21 +492,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A068FFD1856AFDE0002EF22 /* CHDTrip.m in Sources */,
 				0A068FFA18569FE20002EF22 /* NSObject+TypeChecks.m in Sources */,
-				0A068FF7185696C50002EF22 /* CHDLeg.m in Sources */,
-				F92B79911857CEE90089FBFA /* CHDStation.m in Sources */,
+				73A33079185E5B0300AA7AF1 /* _CHDStation.m in Sources */,
+				73A3307E185E5B0300AA7AF1 /* CHDCity.m in Sources */,
+				73A33075185E5B0300AA7AF1 /* _CHDCarType.m in Sources */,
+				73A33080185E5B0300AA7AF1 /* CHDLeg.m in Sources */,
+				73A33076185E5B0300AA7AF1 /* _CHDCity.m in Sources */,
+				73A33077185E5B0300AA7AF1 /* _CHDFavorite.m in Sources */,
+				73A33081185E5B0300AA7AF1 /* CHDStation.m in Sources */,
 				B893D49F1858BAE70046BAEF /* CHDMenueCell.m in Sources */,
+				73A3304D185E530300AA7AF1 /* Constants.m in Sources */,
+				73A3307F185E5B0300AA7AF1 /* CHDFavorite.m in Sources */,
+				73A3307C185E5B0300AA7AF1 /* _CHDTrip.m in Sources */,
 				0A068FF1185676CC0002EF22 /* CHDDatasourceManager.m in Sources */,
+				73A3307D185E5B0300AA7AF1 /* CHDCarType.m in Sources */,
 				B84A18361856700800A984D0 /* main.m in Sources */,
+				73A33084185E5B0300AA7AF1 /* CHDTrip.m in Sources */,
+				73A33083185E5B0300AA7AF1 /* CHDStop.m in Sources */,
+				73A33082185E5B0300AA7AF1 /* CHDStationType.m in Sources */,
+				73A3307A185E5B0300AA7AF1 /* _CHDStationType.m in Sources */,
 				0AA66FF41856533E003D300C /* CHDAppDelegate.m in Sources */,
-				0A068FED1856633B0002EF22 /* CHDStop.m in Sources */,
+				73A3307B185E5B0300AA7AF1 /* _CHDStop.m in Sources */,
 				0A068FF4185685DA0002EF22 /* CHDStationCell.m in Sources */,
+				73A33053185E5A8A00AA7AF1 /* Model.xcdatamodeld in Sources */,
 				B86712021856690800A97960 /* CHDSearchViewController.m in Sources */,
+				73E53CC1185E8700001372F5 /* LoggerClient.m in Sources */,
 				B893D4A21858C1A50046BAEF /* CHDContact.m in Sources */,
 				0A06900018570A350002EF22 /* CHDTestSearchViewController.m in Sources */,
+				73A33078185E5B0300AA7AF1 /* _CHDLeg.m in Sources */,
+				73E53CBC185E7FCC001372F5 /* CHDTripCell.m in Sources */,
+				73E53CC2185E8700001372F5 /* DDNSLoggerLogger.m in Sources */,
 				B8A3AA4F18574F5300F9D72F /* CHDContactCell.m in Sources */,
-				F94C2F4318565A8D003C0FC6 /* (null) in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +530,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F92B79921857CEE90089FBFA /* CHDStation.m in Sources */,
 				0AA6700F1856533E003D300C /* SchnellerVerkehrTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +745,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		73A33051185E5A8A00AA7AF1 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				73A33052185E5A8A00AA7AF1 /* Model.xcdatamodel */,
+			);
+			currentVersion = 73A33052185E5A8A00AA7AF1 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = Model/Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0AA66FD81856533E003D300C /* Project object */;
 }

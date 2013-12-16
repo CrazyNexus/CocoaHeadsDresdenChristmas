@@ -7,6 +7,7 @@
 //
 
 #import "CHDStationCell.h"
+#import "CHDCity.h"
 
 @interface CHDStationCell ()
 
@@ -23,7 +24,7 @@
 - (void)setupFromStation:(CHDStation *)stop {
     self.titleLabel.text    = stop.name;
     self.distanceLabel.text = [NSString stringWithFormat:@"%ld Meter", (long)stop.distance];
-    self.cityLabel.text     = stop.city;
+    self.cityLabel.text     = stop.city.name;
 }
 
 @end
