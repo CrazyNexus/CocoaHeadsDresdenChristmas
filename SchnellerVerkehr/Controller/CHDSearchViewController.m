@@ -23,6 +23,10 @@
 @property (nonatomic, strong) CHDDatasourceManager  *datasourceManager;
 @property (nonatomic, strong) NSMutableArray        *contactItems;
 @property (nonatomic, strong) NSMutableArray        *favoriteItems;
+@property (nonatomic, strong) NSDate                *dateWhenLocationUpdatesStarted;
+@property (nonatomic, strong) CHDStation            *startStation;
+@property (nonatomic, strong) CHDStation            *destinationStation;
+
 
 @end
 
@@ -35,12 +39,22 @@
     self.navigationController.navigationBar.hidden = YES;
 
     // two new buttons in the navigation bar
-//    UIBarButtonItem *addressButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(selectBookmark)];
-//    UIBarButtonItem *favoritButton  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Favorit"] style:UIBarButtonItemStyleBordered target:self action:@selector(saveFavorite)];
-//    self.navigationItem.rightBarButtonItems = @[addressButton, favoritButton];
+    //    UIBarButtonItem *addressButton  = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(selectBookmark)];
+    //    UIBarButtonItem *favoritButton  = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Favorit"] style:UIBarButtonItemStyleBordered target:self action:@selector(saveFavorite)];
+    //    self.navigationItem.rightBarButtonItems = @[addressButton, favoritButton];
 
     __weak CHDSearchViewController *weakSelf = self;
     [[self.destinationTextField.rac_textSignal
+      filter: ^BOOL (NSString *string) {
+          return [string length] >= 3;
+      }]
+     subscribeNext: ^(NSString *name) {
+         [CHDStation findByName:name completion: ^(NSArray *stops) {
+             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
+         }];
+     }];
+
+    [[self.startTextField.rac_textSignal
       filter: ^BOOL (NSString *string) {
           return [string length] >= 3;
       }]
@@ -66,16 +80,24 @@
     }];
 
     [self startLocationService];
-
 }
 
 #pragma mark - Table View Delegate
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[self.datasourceManager dataForIndexPath:indexPath] isKindOfClass:[CHDStation class]]) {
-        return 65.0;
-    }
-    return tableView.rowHeight;
+
+    UITableViewCell *cell = [self.datasourceManager tableView:tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.bounds = CGRectMake(0, 0, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.contentView.bounds));
+
+    [cell.contentView setNeedsLayout];
+    [cell.contentView layoutIfNeeded];
+
+    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,21 +105,27 @@
 
     switch (indexPath.section) {
         case 0:
+        {
             station = [self.datasourceManager dataForIndexPath:indexPath];
 
             if (self.didSelectStationBlock) {
                 self.didSelectStationBlock(station);
             }
             break;
+        }
 
         case 1:
+        {
             [self tableView:tableView changeImageInMenuCellAtIndexPath:indexPath];
-            [self extendValuesForContactsinTableView:tableView forIndexPath:indexPath];
+            [self extendValuesForContactsInTableView:tableView forIndexPath:indexPath];
             break;
+        }
 
         case 2:
+        {
             [self tableView:tableView changeImageInMenuCellAtIndexPath:indexPath];
             break;
+        }
     }
 }
 
@@ -105,10 +133,12 @@
     if (indexPath.row == 0) {
         CHDMenueCell *cell;
         cell = (CHDMenueCell *)[tableView cellForRowAtIndexPath:indexPath];
-        if (cell.menuItemImage.image == [UIImage imageNamed:@"arrow_right"])
+        if (cell.menuItemImage.image == [UIImage imageNamed:@"arrow_right"]) {
             cell.menuItemImage.image = [UIImage imageNamed:@"arrow_down"];
-        else
+        }
+        else {
             cell.menuItemImage.image = [UIImage imageNamed:@"arrow_right"];
+        }
     }
 }
 
@@ -116,11 +146,12 @@
 #pragma mark Current Location
 
 - (void)startLocationService {
-    _locationManager                    = [[CLLocationManager alloc] init];
-    _locationManager.delegate           = self;
-    _locationManager.desiredAccuracy    = kCLLocationAccuracyHundredMeters;
+    self.locationManager                    = [[CLLocationManager alloc] init];
+    self.locationManager.delegate           = self;
+    self.locationManager.desiredAccuracy    = kCLLocationAccuracyHundredMeters;
     if ([CLLocationManager locationServicesEnabled]) {
-        [_locationManager startUpdatingLocation];
+        [self.locationManager startUpdatingLocation];
+        self.dateWhenLocationUpdatesStarted = [NSDate date];
     }
     else {
         UIAlertView *alert = [[UIAlertView alloc]   initWithTitle       :nil
@@ -128,7 +159,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-        [alert show];
+//        [alert show];
     }
 }
 
@@ -138,22 +169,23 @@
         DDLogWarn(@"Accuracity is negative, coordinates are not avaliable");
     }
     else {
-        NSDate          *eventDate  = location.timestamp;
-        NSTimeInterval  howRecent   = [eventDate timeIntervalSinceNow];
-        if (howRecent < -0.0 && howRecent > -10.0) {
+        NSTimeInterval timeSinceLocationUpdatesStarted = [location.timestamp timeIntervalSinceDate:self.dateWhenLocationUpdatesStarted];
+        if (timeSinceLocationUpdatesStarted >= 10) {
             // Positionsbestimmung stoppen
             [manager stopUpdatingLocation];
-            DDLogVerbose(@"Latitude: %f", location.coordinate.latitude);
-            DDLogVerbose(@"Longitude: %f", location.coordinate.longitude);
-
-            // save new location values for further processing
-            [self getStreetFromLocation:location];
-
-            // get the stops for current location and show in table
-            [CHDStation findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
-                self.datasourceManager.sectionsDatasource = @[[stops copy]];
-            }];
         }
+        DDLogVerbose(@"Latitude: %f", location.coordinate.latitude);
+        DDLogVerbose(@"Longitude: %f", location.coordinate.longitude);
+
+        // save new location values for further processing
+        [self getStreetFromLocation:location];
+
+        // get the stops for current location and show in table
+        [CHDStation findByLatitude  :location.coordinate.latitude
+                    longitude       :location.coordinate.longitude
+                    completion      : ^(NSArray *stops) {
+                        self.datasourceManager.sectionsDatasource = @[[stops copy]];
+                    }];
     }
 }
 
@@ -165,7 +197,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-        [alert show];
+//        [alert show];
     }
     // if no WiFi or internet is available
     if (error.code == kCLErrorLocationUnknown) {
@@ -174,7 +206,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-        [alert show];
+//        [alert show];
     }
 }
 
@@ -184,17 +216,32 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:currentLocation completionHandler: ^(NSArray *placemarks, NSError *error) {
         CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
-//        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
+        //        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
         self.startTextField.placeholder = [NSString stringWithFormat:@"%@, %@", aPlacemark.name, aPlacemark.locality];
-        self.startTextField.rightViewMode = UITextFieldViewModeAlways;
-        self.startTextField.rightView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"geolocation"]];
+        self.startTextField.leftViewMode = UITextFieldViewModeAlways;
+        self.startTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"geolocation"]];
     }];
 }
 
 #pragma mark - UITextField Delegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-//    self.destinationTextField.text = self.destinationTextField.placeholder;
+    __weak CHDSearchViewController *weakSelf = self;
+
+    self.datasourceManager.sectionsDatasource = @[];
+    [self.tableView reloadData];
+
+    self.didSelectStationBlock = ^(CHDStation *station) {
+        if (textField == weakSelf.startTextField) {
+            weakSelf.startStation = station;
+        }
+        else {
+            weakSelf.destinationStation = station;
+        }
+        textField.text = station.name;
+
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
 }
 
 - (void)selectBookmark {
@@ -206,7 +253,7 @@
 - (void)saveFavorite {
 }
 
-- (void)extendValuesForContactsinTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath {
+- (void)extendValuesForContactsInTableView:(UITableView *)tableView forIndexPath:(NSIndexPath *)indexPath {
     if ([_contactItems count] == 1) {
         [_contactItems addObjectsFromArray:_contactItems];
         [tableView reloadData];
@@ -215,6 +262,19 @@
     else {
         [tableView reloadData];
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (self.startStation != nil
+        && self.destinationStation != nil) {
+        [CHDTrip findTripWithOrigin:self.startStation destination:self.destinationStation calcNumberOfTrips:3 completion: ^(NSArray *trips) {
+            NSLog(@"trips: %@", trips);
+            if (trips) {
+                self.datasourceManager.sectionsDatasource = @[[trips copy]];
+            }
+        }];
+    }
+    return YES;
 }
 
 #pragma mark - People Picker Delegate
@@ -249,10 +309,11 @@
         }];
     }
 
-    [_contactItems addObject:newContact];
+    [self.contactItems addObject:newContact];
 
     [self dismissViewControllerAnimated:YES completion:NULL];
-    [_tableView reloadData];
+    [self.tableView reloadData];
+
     return NO;
 }
 

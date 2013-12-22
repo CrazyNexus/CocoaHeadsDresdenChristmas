@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  SchnellerVerkehr
+
+  Created by Pit Garbe on 22.12.13.
+  Copyright (c) 2013 CocoaHeads Dresden. All rights reserved.
+*/
+
+// Car Types
+
+"Train" = "Zug";
+"SBahn" = "S-Bahn";
+"UBahn" = "U-Bahn";
+"StadtBahn" = "Stadtbahn";
+"StrassenBahn" = "Straßenbahn";
+"StadtBus" = "Stadtbus";
+"RegionalBus" = "Regionalbus";
+"SchnellBus" = "Schnellbus";
+"SeilBahn" = "Seilbahn";
+"Schiff" = "Schiff";
+"RufBus" = "Rufbus";
+"Unknown" = "Unbekannt";

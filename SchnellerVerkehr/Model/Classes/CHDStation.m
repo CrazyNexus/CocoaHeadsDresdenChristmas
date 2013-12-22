@@ -32,14 +32,17 @@
     return station;
 }
 
-- (BOOL)isIdentifiable {
+- (BOOL)identifiable {
     NSString *type = self.type.name;
     if ([type isEqualToString:@"Stop"] || [type isEqualToString:@"POI"] || [type isEqualToString:@"Loc"]) {
+        DDLogInfo(@"self.id: %@", self.id);
         return self.id > 0;
     }
     else if ([type isEqualToString:@"Coord"]) {
+        DDLogInfo(@"self.latitude: %@", self.latitude);
         return self.latitude != nil;
     }
+    DDLogInfo(@"Type: %@", type);
 
     return NO;
 }
@@ -107,9 +110,11 @@
                                 }];
                             }
 
+                            DDLogInfo(@"temp: %@", temp);
                             [temp enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *cancel) {
                                 CHDStation *station = [CHDStation stationWithCityName:obj[@"city"] stationName:obj[@"name"]];
-                                station.id = [obj[@"stationID"] numberValue];
+                                station.id = [formatter numberFromString:obj[@"stationID"]];
+                                station.type = [CHDStationType typeByName:obj[@"type"]];
                                 [station setTypeWithString:obj[@"type"]];
 
                                 [stations addObject:station];

@@ -36,4 +36,16 @@
     }
 }
 
++ (instancetype)typeByName:(NSString *)name {
+    return [self MR_findFirstByAttribute:@"name" withValue:name];
+}
+
++ (instancetype)typeByID:(NSNumber *)typeID {
+    return [self MR_findFirstByAttribute:@"id" withValue:typeID];
+}
+
+- (NSString *)localizedName {
+    return NSLocalizedString(self.name, @"");
+}
+
 @end

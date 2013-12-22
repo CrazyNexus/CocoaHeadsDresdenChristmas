@@ -20,11 +20,9 @@
     return trip;
 }
 
-+ (void)findTripWithOrigin  :(CHDStation *)origin
-        destination         :(CHDStation *)destination
-        calcNumberOfTrips   :(NSUInteger)calcNumberOfTrips
-        completion          :(TripSearchCompletionBlock)completion {
-    if (!origin.identifiable || !destination.identifiable) {
++ (void)findTripWithOrigin  :(CHDStation *)origin destination:(CHDStation *)destination
+        calcNumberOfTrips   :(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion {
+    if (![origin identifiable] || ![destination identifiable]) {
         if (completion) {
             completion(nil); // completion block with no trips
         }
@@ -33,8 +31,8 @@
 
     NSString    *originName         = [origin mangledName];
     NSString    *originType         = [origin mangledType];
-    NSString    *destinationName    = [origin mangledName];
-    NSString    *destinationType    = [origin mangledType];
+    NSString    *destinationName    = [destination mangledName];
+    NSString    *destinationType    = [destination mangledType];
 
     NSString    *url                = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_TRIP_REQUEST2"
                                        "?sessionID=0"
@@ -49,6 +47,7 @@
                                        "&outputFormat=JSON",
                                        (int)calcNumberOfTrips, originName, originType, destinationName, destinationType];
 
+    DDLogDebug(@"URL: %@", url);
     NSURLSession *session = [NSURLSession sharedSession];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -85,7 +84,7 @@
                                 NSInteger interchanges = [[tripDictionary valueForKeyPath:@"trip.interchange"] integerValue];
                                 NSMutableArray *legs = [NSMutableArray array];
 
-                                for (NSDictionary * legDictionary in [tripDictionary valueForKeyPath: @"trip.legs"]) {
+                                for (NSDictionary * legDictionary in [tripDictionary valueForKeyPath:@"trip.legs"]) {
                                     [legs addObject:[CHDLeg legWithDictionary:legDictionary]];
                                 }
 

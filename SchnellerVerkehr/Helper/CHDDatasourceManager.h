@@ -22,5 +22,6 @@ typedef void (^CHDDataSourceManagerCellSetupBlock)(id cell, id data, NSIndexPath
 - (void)registerCellReuseIdentifier:(NSString *)reuseIdentifier forDataObject:(Class)classType setupBlock:(CHDDataSourceManagerCellSetupBlock)setupBlock;
 
 - (id)dataForIndexPath:(NSIndexPath *)indexPath;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

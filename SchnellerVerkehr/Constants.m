@@ -1,3 +1,3 @@
 #import "Constants.h"
 
-NSString *const kSQLiteStoreName    = @"haec.sqlite";
+NSString *const kSQLiteStoreName    = @"verkehr.sqlite";

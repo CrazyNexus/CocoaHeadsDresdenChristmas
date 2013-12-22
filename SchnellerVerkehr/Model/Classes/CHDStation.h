@@ -7,7 +7,7 @@ typedef void (^StationSearchCompletionBlock)(NSArray *stations);
 @interface CHDStation : _CHDStation {}
 
 @property (nonatomic, readonly) NSInteger distance;
-@property (nonatomic, readonly, getter = isIdentifiable) BOOL identifiable;
+@property (nonatomic, readonly) BOOL identifiable;
 
 + (instancetype)stationWithCityName:(NSString *)cityName;
 + (instancetype)stationWithCityName:(NSString *)cityName stationName:(NSString *)stationName;

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CHDTrip.h"
+@class CHDTrip;
 
 @interface CHDTripCell : UITableViewCell
 

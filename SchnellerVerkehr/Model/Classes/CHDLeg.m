@@ -18,7 +18,7 @@
         return nil;
     }
 
-    CHDLeg *leg = [[self alloc] init];
+    CHDLeg *leg = [CHDLeg MR_createEntity];
     [leg setupFromData:dictionary];
     return leg;
 }
@@ -34,6 +34,19 @@
     return formatter;
 }
 
++ (NSNumberFormatter *)sharedDecimalFormatter {
+    static NSNumberFormatter *formatter = nil;
+    static dispatch_once_t  onceToken;
+    dispatch_once(&onceToken, ^{
+        formatter = [[NSNumberFormatter alloc] init];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    });
+
+    return formatter;
+}
+
+
+
 - (void)setupFromData:(NSDictionary *)dictionary {
     NSDictionary *mode = [[dictionary valueForKey:@"mode"] dictionaryValue];
 
@@ -41,7 +54,7 @@
         self.name           = [mode[@"name"] nonEmptyStringValue];
         self.lineNumber     = [mode[@"number"] nonEmptyStringValue];
         self.destination    = [mode[@"destination"] nonEmptyStringValue];
-        self.carType        = [CHDCarType MR_findFirstByAttribute:@"id" withValue:[mode[@"type"] numberValue]];
+        self.carType        = [CHDCarType typeByID:[[CHDLeg sharedDecimalFormatter] numberFromString:mode[@"type"]]];
     }
 
     NSArray *stops = [[dictionary objectForKey:@"stopSeq"] arrayValue];
@@ -50,7 +63,7 @@
         NSMutableArray *stopsArray = [NSMutableArray arrayWithCapacity:stops.count];
 
         for (NSDictionary *stopDict in stops) {
-            NSNumber    *stationID  = [stopDict[@"ref"][@"id"] numberValue];
+            NSNumber    *stationID  = [[CHDLeg sharedDecimalFormatter] numberFromString:stopDict[@"ref"][@"id"]];
             CHDStation  *station    = [CHDStation MR_findFirstByAttribute:@"id" withValue:stationID];
             if (!station) {
                 station     = [CHDStation MR_createEntity];
@@ -69,6 +82,7 @@
             CHDStop *stop = [CHDStop MR_createEntity];
             stop.arrivalDate    = [[CHDLeg sharedDateFormatter] dateFromString:stopDict[@"ref"][@"arrDateTime"]];
             stop.departureDate  = [[CHDLeg sharedDateFormatter] dateFromString:stopDict[@"ref"][@"depDateTime"]];
+            stop.station = station;
 
             [stopsArray addObject:stop];
         }

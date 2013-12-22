@@ -29,4 +29,8 @@
     }
 }
 
++ (instancetype)typeByName:(NSString *)name {
+    return [self MR_findFirstByAttribute:@"name" withValue:name];
+}
+
 @end

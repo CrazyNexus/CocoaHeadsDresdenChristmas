@@ -8,10 +8,11 @@
 
 #import "CHDAppDelegate.h"
 
-#import "CHDStation.h"
-#import "CHDTrip.h"
 #import "DDNSLoggerLogger.h"
 #import <CocoaLumberjack/DDTTYLogger.h>
+
+#import "CHDStationType.h"
+#import "CHDCarType.h"
 
 @implementation CHDAppDelegate
 
@@ -37,6 +38,11 @@
     [DDLog addLogger:[DDNSLoggerLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     [MagicalRecord setupCoreDataStackWithStoreNamed:kSQLiteStoreName];
+
+    // prepopulate station types and car types
+
+    [CHDStationType populateWithDefaultTypes];
+    [CHDCarType populateWithDefaultTypes];
 
 
     return YES;

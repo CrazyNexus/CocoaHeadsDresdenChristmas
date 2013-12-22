@@ -7,6 +7,10 @@
 //
 
 #import "CHDTripCell.h"
+#import "CHDTrip.h"
+#import "CHDStop.h"
+#import "CHDStation.h"
+#import "CHDCarType.h"
 #import "CHDLeg.h"
 
 @interface CHDTripCell ()
@@ -37,14 +41,40 @@
 }
 
 - (void)setupFromTrip:(CHDTrip *)trip {
-    self.titleLabel.text = @"A Trip";
+    NSDate *departureDate = ((CHDStop *)((CHDLeg *)trip.legs[0]).stops[0]).departureDate;
+    NSTimeInterval departure = [departureDate timeIntervalSinceDate:[NSDate date]];
+
+    NSInteger minutes = (NSInteger)departure / 60;
+    NSInteger seconds = (NSInteger)departure % 60;
+
+    if (departure > 0) {
+        self.titleLabel.text = [NSString stringWithFormat:@"Start in %d:%02d minutes", minutes, seconds];
+    }
+    else {
+        self.titleLabel.text = [NSString stringWithFormat:@"Started %d:%2d minutes ago", -minutes, -seconds];
+    }
     NSArray *legs = [trip.legs array];
     CHDLeg *firstLeg = [legs firstObject];
     CHDLeg *lastLeg = [legs lastObject];
 
-    self.fromLabel.text = firstLeg.name;
-    self.toLabel.text = lastLeg.name;
-    self.changesLabel.text = [NSString stringWithFormat:@"%@", trip.interchanges];
+    self.fromLabel.text = [NSString stringWithFormat:@"%@ %@\nfrom %@ (destination %@)", firstLeg.carType.localizedName, firstLeg.lineNumber, ((CHDStop *)firstLeg.stops[0]).station.name, firstLeg.destination];
+
+    self.toLabel.text = [NSString stringWithFormat:@"%@", ((CHDStop *)[lastLeg.stops lastObject]).station.name];
+
+    NSString *interchanges;
+    if (trip.interchangesValue > 0) {
+        if (trip.interchangesValue == 1) {
+            interchanges = @"1 change";
+        }
+        else {
+            interchanges = [NSString stringWithFormat:@"%@ changes", trip.interchanges];
+        }
+    }
+    else {
+        interchanges = @"No changes";
+    }
+    self.changesLabel.text = interchanges;
+    DDLogInfo(@"changes label: %@ (%@)", NSStringFromCGRect(self.changesLabel.frame), self.changesLabel.text);
 }
 
 @end
