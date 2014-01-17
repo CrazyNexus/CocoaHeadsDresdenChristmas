@@ -7,11 +7,14 @@
 @interface CHDLeg ()
 
 // Private interface goes here.
+@property (nonatomic, strong) NSString *dict;
 
 @end
 
 
 @implementation CHDLeg
+
+@synthesize dict;
 
 + (instancetype)legWithDictionary:(NSDictionary *)dictionary {
     if (![dictionary dictionaryValue]) {
@@ -35,8 +38,8 @@
 }
 
 + (NSNumberFormatter *)sharedDecimalFormatter {
-    static NSNumberFormatter *formatter = nil;
-    static dispatch_once_t  onceToken;
+    static NSNumberFormatter    *formatter = nil;
+    static dispatch_once_t      onceToken;
     dispatch_once(&onceToken, ^{
         formatter = [[NSNumberFormatter alloc] init];
         [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -45,10 +48,9 @@
     return formatter;
 }
 
-
-
 - (void)setupFromData:(NSDictionary *)dictionary {
     NSDictionary *mode = [[dictionary valueForKey:@"mode"] dictionaryValue];
+    self.dict = [NSString stringWithFormat:@"%@", dictionary];
 
     if (mode) {
         self.name           = [mode[@"name"] nonEmptyStringValue];
@@ -59,14 +61,14 @@
 
     NSArray *stops = [[dictionary objectForKey:@"stopSeq"] arrayValue];
 
-    if (stops.count > 0) {
-        NSMutableArray *stopsArray = [NSMutableArray arrayWithCapacity:stops.count];
-
+    [MagicalRecord saveUsingCurrentThreadContextWithBlockAndWait: ^(NSManagedObjectContext *localContext) {
+        NSUInteger idx = 0;
         for (NSDictionary *stopDict in stops) {
-            NSNumber    *stationID  = [[CHDLeg sharedDecimalFormatter] numberFromString:stopDict[@"ref"][@"id"]];
-            CHDStation  *station    = [CHDStation MR_findFirstByAttribute:@"id" withValue:stationID];
+            NSString *stationID  = stopDict[@"ref"][@"id"];
+
+            CHDStation *station = [CHDStation MR_findFirstByAttribute:@"id" withValue:stationID inContext:localContext];
             if (!station) {
-                station     = [CHDStation MR_createEntity];
+                station     = [CHDStation MR_createInContext:localContext];
                 station.id  = stationID;
 
                 NSString *name = [stopDict[@"nameWO"] nonEmptyStringValue];
@@ -74,21 +76,32 @@
 
                 NSArray *coords = [stopDict[@"ref"][@"coords"] componentsSeparatedByString:@","];
                 if ([coords count] == 2) {
-                    station.longitudeValue  = [coords[0] floatValue];
-                    station.latitudeValue   = [coords[1] floatValue];
+                    station.longitudeValue  = [coords[0] doubleValue];
+                    station.latitudeValue   = [coords[1] doubleValue];
                 }
             }
 
-            CHDStop *stop = [CHDStop MR_createEntity];
+            CHDStop *stop = [CHDStop MR_createInContext:localContext];
             stop.arrivalDate    = [[CHDLeg sharedDateFormatter] dateFromString:stopDict[@"ref"][@"arrDateTime"]];
             stop.departureDate  = [[CHDLeg sharedDateFormatter] dateFromString:stopDict[@"ref"][@"depDateTime"]];
             stop.station = station;
+            stop.order = @(idx);
 
-            [stopsArray addObject:stop];
-        }
+            DDLogInfo(@"---> Stop: %@", stop);
 
-        self.stops = [NSOrderedSet orderedSetWithArray:stopsArray];
-    }
+            idx++;
+            
+            [self addStopsObject:stop];
+        };
+    }];
+}
+
+- (NSArray *)orderedStopsArray {
+    return [self.stops sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES]]];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ %@", self.orderedStopsArray, self.dict];
 }
 
 @end

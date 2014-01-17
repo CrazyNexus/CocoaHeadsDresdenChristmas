@@ -23,6 +23,7 @@
 + (void)findTripWithOrigin  :(CHDStation *)origin destination:(CHDStation *)destination
         calcNumberOfTrips   :(NSUInteger)calcNumberOfTrips completion:(TripSearchCompletionBlock)completion {
     if (![origin identifiable] || ![destination identifiable]) {
+        DDLogInfo(@"not identifiable");
         if (completion) {
             completion(nil); // completion block with no trips
         }
@@ -71,7 +72,7 @@
                             NSRegularExpression *re = [NSRegularExpression  regularExpressionWithPattern:@"^[0-5][0-9]:[0-5][0-9]$"
                                                                             options                     :NSRegularExpressionAnchorsMatchLines
                                                                             error                       :nil];
-                            for (NSDictionary * tripDictionary in JSON[@"trips"]) {
+                            for (NSDictionary *tripDictionary in JSON[@"trips"]) {
                                 NSTimeInterval duration;
                                 NSString *minSecDuration = [tripDictionary valueForKeyPath:@"trip.duration"];
                                 NSUInteger matches = [[re   matchesInString :minSecDuration
@@ -84,7 +85,7 @@
                                 NSInteger interchanges = [[tripDictionary valueForKeyPath:@"trip.interchange"] integerValue];
                                 NSMutableArray *legs = [NSMutableArray array];
 
-                                for (NSDictionary * legDictionary in [tripDictionary valueForKeyPath:@"trip.legs"]) {
+                                for (NSDictionary *legDictionary in [tripDictionary valueForKeyPath:@"trip.legs"]) {
                                     [legs addObject:[CHDLeg legWithDictionary:legDictionary]];
                                 }
 

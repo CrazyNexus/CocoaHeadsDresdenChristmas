@@ -14,23 +14,24 @@
     NSUInteger count = [CHDStationType MR_countOfEntities];
     if (count == 0) {
         NSDictionary *types = @{
-                                @"Stop":@0,
-                                @"POI":@1,
-                                @"Loc":@2,
-                                @"Coord":@3,
-                                @"Unknown":@4,
+                                @"Stop":@"stopID",
+                                @"POI":@"poiID",
+                                @"Loc":@"placeID",
+                                @"Coord":@"coordID",
+                                @"Unknown":@"anyID",
+                                @"House":@"anyID"
                                 };
 
-        for (NSString *key in types.allKeys) {
-            CHDStationType *carType = [CHDStationType MR_createEntity];
-            carType.name    = key;
-            carType.id      = types[key];
-        }
+        [types enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            CHDStationType *stationType = [CHDStationType MR_createEntity];
+            stationType.name        = key;
+            stationType.searchType  = obj;
+        }];
     }
 }
 
 + (instancetype)typeByName:(NSString *)name {
-    return [self MR_findFirstByAttribute:@"name" withValue:name];
+    return [self MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"name ==[c] %@", name]];
 }
 
 @end

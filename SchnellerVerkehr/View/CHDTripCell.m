@@ -41,25 +41,34 @@
 }
 
 - (void)setupFromTrip:(CHDTrip *)trip {
-    NSDate *departureDate = ((CHDStop *)((CHDLeg *)trip.legs[0]).stops[0]).departureDate;
+    NSArray *legs = [trip.legs array];
+
+    CHDLeg *firstLeg = [legs firstObject];
+    CHDLeg *lastLeg = [legs lastObject];
+
+    CHDStop *firstStop = [firstLeg.orderedStopsArray firstObject];
+    CHDStop *lastStop = [lastLeg.orderedStopsArray lastObject];
+
+    NSDate *departureDate = firstStop.departureDate;
     NSTimeInterval departure = [departureDate timeIntervalSinceDate:[NSDate date]];
 
-    NSInteger minutes = (NSInteger)departure / 60;
-    NSInteger seconds = (NSInteger)departure % 60;
+    int minutes = (int)departure / 60;
+    int seconds = (int)departure % 60;
 
     if (departure > 0) {
         self.titleLabel.text = [NSString stringWithFormat:@"Start in %d:%02d minutes", minutes, seconds];
     }
     else {
-        self.titleLabel.text = [NSString stringWithFormat:@"Started %d:%2d minutes ago", -minutes, -seconds];
+        self.titleLabel.text = [NSString stringWithFormat:@"Started %d:%02d minutes ago", -minutes, -seconds];
     }
-    NSArray *legs = [trip.legs array];
-    CHDLeg *firstLeg = [legs firstObject];
-    CHDLeg *lastLeg = [legs lastObject];
 
-    self.fromLabel.text = [NSString stringWithFormat:@"%@ %@\nfrom %@ (destination %@)", firstLeg.carType.localizedName, firstLeg.lineNumber, ((CHDStop *)firstLeg.stops[0]).station.name, firstLeg.destination];
+    for (CHDLeg *leg in legs) {
+        DDLogInfo(@"%@", leg);
+    }
 
-    self.toLabel.text = [NSString stringWithFormat:@"%@", ((CHDStop *)[lastLeg.stops lastObject]).station.name];
+    self.fromLabel.text = [NSString stringWithFormat:@"%@ %@\nfrom %@ (destination %@)", firstLeg.carType.localizedName, firstLeg.lineNumber, firstStop.station.name, firstLeg.destination];
+
+    self.toLabel.text = [NSString stringWithFormat:@"%@", lastStop.station.name];
 
     NSString *interchanges;
     if (trip.interchangesValue > 0) {
@@ -74,7 +83,6 @@
         interchanges = @"No changes";
     }
     self.changesLabel.text = interchanges;
-    DDLogInfo(@"changes label: %@ (%@)", NSStringFromCGRect(self.changesLabel.frame), self.changesLabel.text);
 }
 
 @end

@@ -5,8 +5,8 @@
 
 
 extern const struct CHDStationTypeAttributes {
-	__unsafe_unretained NSString *id;
 	__unsafe_unretained NSString *name;
+	__unsafe_unretained NSString *searchType;
 } CHDStationTypeAttributes;
 
 extern const struct CHDStationTypeRelationships {
@@ -34,25 +34,21 @@ extern const struct CHDStationTypeFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber* id;
-
-
-
-@property int16_t idValue;
-- (int16_t)idValue;
-- (void)setIdValue:(int16_t)value_;
-
-//- (BOOL)validateId:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
 @property (nonatomic, strong) NSString* name;
 
 
 
 //- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* searchType;
+
+
+
+//- (BOOL)validateSearchType:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -80,17 +76,14 @@ extern const struct CHDStationTypeFetchedProperties {
 @interface _CHDStationType (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSNumber*)primitiveId;
-- (void)setPrimitiveId:(NSNumber*)value;
-
-- (int16_t)primitiveIdValue;
-- (void)setPrimitiveIdValue:(int16_t)value_;
-
-
-
-
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveSearchType;
+- (void)setPrimitiveSearchType:(NSString*)value;
 
 
 

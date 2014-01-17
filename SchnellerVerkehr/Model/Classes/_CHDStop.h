@@ -7,6 +7,7 @@
 extern const struct CHDStopAttributes {
 	__unsafe_unretained NSString *arrivalDate;
 	__unsafe_unretained NSString *departureDate;
+	__unsafe_unretained NSString *order;
 } CHDStopAttributes;
 
 extern const struct CHDStopRelationships {
@@ -19,6 +20,7 @@ extern const struct CHDStopFetchedProperties {
 
 @class CHDLeg;
 @class CHDStation;
+
 
 
 
@@ -56,6 +58,20 @@ extern const struct CHDStopFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* order;
+
+
+
+@property int16_t orderValue;
+- (int16_t)orderValue;
+- (void)setOrderValue:(int16_t)value_;
+
+//- (BOOL)validateOrder:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) CHDLeg *leg;
 
 //- (BOOL)validateLeg:(id*)value_ error:(NSError**)error_;
@@ -88,6 +104,15 @@ extern const struct CHDStopFetchedProperties {
 
 - (NSDate*)primitiveDepartureDate;
 - (void)setPrimitiveDepartureDate:(NSDate*)value;
+
+
+
+
+- (NSNumber*)primitiveOrder;
+- (void)setPrimitiveOrder:(NSNumber*)value;
+
+- (int16_t)primitiveOrderValue;
+- (void)setPrimitiveOrderValue:(int16_t)value_;
 
 
 

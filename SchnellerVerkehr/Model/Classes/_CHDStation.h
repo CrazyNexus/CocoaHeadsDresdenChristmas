@@ -44,13 +44,9 @@ extern const struct CHDStationFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSNumber* id;
+@property (nonatomic, strong) NSString* id;
 
 
-
-@property int64_t idValue;
-- (int64_t)idValue;
-- (void)setIdValue:(int64_t)value_;
 
 //- (BOOL)validateId:(id*)value_ error:(NSError**)error_;
 
@@ -134,11 +130,8 @@ extern const struct CHDStationFetchedProperties {
 @interface _CHDStation (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSNumber*)primitiveId;
-- (void)setPrimitiveId:(NSNumber*)value;
-
-- (int64_t)primitiveIdValue;
-- (void)setPrimitiveIdValue:(int64_t)value_;
+- (NSString*)primitiveId;
+- (void)setPrimitiveId:(NSString*)value;
 
 
 

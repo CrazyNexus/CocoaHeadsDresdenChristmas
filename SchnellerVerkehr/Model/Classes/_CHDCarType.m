@@ -9,7 +9,7 @@ const struct CHDCarTypeAttributes CHDCarTypeAttributes = {
 };
 
 const struct CHDCarTypeRelationships CHDCarTypeRelationships = {
-	.cars = @"cars",
+	.legs = @"legs",
 };
 
 const struct CHDCarTypeFetchedProperties CHDCarTypeFetchedProperties = {
@@ -86,15 +86,15 @@ const struct CHDCarTypeFetchedProperties CHDCarTypeFetchedProperties = {
 
 
 
-@dynamic cars;
+@dynamic legs;
 
 	
-- (NSMutableSet*)carsSet {
-	[self willAccessValueForKey:@"cars"];
+- (NSMutableSet*)legsSet {
+	[self willAccessValueForKey:@"legs"];
   
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"cars"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"legs"];
   
-	[self didAccessValueForKey:@"cars"];
+	[self didAccessValueForKey:@"legs"];
 	return result;
 }
 	

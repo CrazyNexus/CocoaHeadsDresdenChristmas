@@ -33,33 +33,30 @@
 }
 
 - (BOOL)identifiable {
-    NSString *type = self.type.name;
-    if ([type isEqualToString:@"Stop"] || [type isEqualToString:@"POI"] || [type isEqualToString:@"Loc"]) {
+    NSString *type = self.type.searchType;
+    DDLogInfo(@"Type: %@", type);
+    
+    if ([type isEqualToString:@"stopID"] || [type isEqualToString:@"poiID"] || [type isEqualToString:@"placeID"]) {
         DDLogInfo(@"self.id: %@", self.id);
-        return self.id > 0;
+        return self.id.length > 0;
     }
-    else if ([type isEqualToString:@"Coord"]) {
+    else if ([type isEqualToString:@"coordID"]) {
         DDLogInfo(@"self.latitude: %@", self.latitude);
         return self.latitude != nil;
     }
-    DDLogInfo(@"Type: %@", type);
 
     return NO;
 }
 
 - (void)setTypeWithString:(NSString *)typeString {
-    CHDStationType *stationType = [CHDStationType MR_findFirstWithPredicate:[NSPredicate predicateWithFormat:@"name ==[c] %@", typeString]];
+    CHDStationType *stationType = [CHDStationType typeByName:typeString];
     if (!stationType) {
-        stationType = [CHDStationType MR_findFirstByAttribute:@"name" withValue:@"unknown"];
+        stationType = [CHDStationType typeByName:@"unknown"];
     }
     self.type = stationType;
 }
 
 + (void)findByName:(NSString *)name completion:(StationSearchCompletionBlock)completion {
-#if DEBUG
-    NSLog(@"Find %@", name);
-#endif
-
     NSString *url = [NSString stringWithFormat:@"http://efa.vvo-online.de:8080/standard/XML_STOPFINDER_REQUEST"
                      "?locationServerActive=1"
                      "&outputFormat=JSON"
@@ -101,20 +98,19 @@
                                     quality = @0;
                                 }
 
+                                NSString *type = stationDict[@"anyType"];
+
                                 NSString *stationID = stationDict[@"stateless"];
 
-                                NSString *type = stationDict[@"anyType"];
                                 [temp addObject:@{ @"quality":quality, @"city":city, @"name":name, @"stationID":stationID, @"type":type }];
                                 [temp sortUsingComparator: ^NSComparisonResult (id obj1, id obj2) {
-                                    return [obj2[@"quality"] compare:obj1[@"quality"]];            // biggest quality is best
+                                    return [obj2[@"quality"] compare:obj1[@"quality"]];                    // biggest quality is best
                                 }];
                             }
 
-                            DDLogInfo(@"temp: %@", temp);
                             [temp enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *cancel) {
                                 CHDStation *station = [CHDStation stationWithCityName:obj[@"city"] stationName:obj[@"name"]];
-                                station.id = [formatter numberFromString:obj[@"stationID"]];
-                                station.type = [CHDStationType typeByName:obj[@"type"]];
+                                station.id = obj[@"stationID"];
                                 [station setTypeWithString:obj[@"type"]];
 
                                 [stations addObject:station];
@@ -170,11 +166,14 @@
 
                             [stationList enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *cancel) {
                                 CHDStation *station = [CHDStation stationWithCityName:obj[@"locality"] stationName:obj[@"desc"]];
-                                station.id = [obj[@"id"] numberValue];
+                                station.id = obj[@"id"];
 
-                                //  do we need to set this? it's probably the distance from the search location, and most likely it's the line of sight distance
-                                //  so it's kind of useless, as its better to update and calculate this on the fly depending on the CURRENT user location (he's moving anyway!)
-                                //                                station.distance = [obj[@"distance"] integerValue];
+                                /* do we need to set this? it's probably the distance from the search location,
+                                 and most likely it's the line of sight distance so it's kind of useless,
+                                 as its better to update and calculate this on the fly depending
+                                 on the CURRENT user location (he's moving anyway!) */
+
+                                //  station.distance = [obj[@"distance"] integerValue];
 
                                 [stations addObject:station];
                             }];
@@ -192,41 +191,36 @@
 }
 
 - (NSString *)mangledName {
-    NSString *type = self.type.name;
-    if ([type isEqualToString:@"Stop"]) {
+    NSString *type = self.type.searchType;
+    if ([type isEqualToString:@"stopID"]) {
         return [self.id stringValue];
     }
-    else if ([type isEqualToString:@"POI"]) {
+    else if ([type isEqualToString:@"poiID"]) {
         return [[self.id stringValue] substringFromIndex:6];
     }
-    else if ([type isEqualToString:@"Loc"]) {
+    else if ([type isEqualToString:@"placeID"]) {
         return [[self.id stringValue] substringFromIndex:8];
     }
-    else if ([type isEqualToString:@"Coord"]) {
+    else if ([type isEqualToString:@"coordID"]) {
         return [NSString stringWithFormat:@"%f:%f:WGS84", self.longitudeValue, self.latitudeValue];
     }
     return self.name;
 }
 
 - (NSString *)mangledType {
-    NSString *type = self.type.name;
-    if ([type isEqualToString:@"Stop"]) {
-        return @"stopID";
-    }
-    else if ([type isEqualToString:@"POI"]) {
-        return @"poiID";
-    }
-    else if ([type isEqualToString:@"Loc"]) {
-        return @"placeID";
-    }
-    else if ([type isEqualToString:@"Coord"]) {
-        return @"coordID";
-    }
-    return @"any";
+    return self.type.searchType;
 }
 
 - (NSInteger)distance {
     return 666;
+}
+
+- (NSString *)fullName {
+    return [NSString stringWithFormat:@"%@, %@", self.name, self.city.name];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ (%@)", self.fullName, self.id];
 }
 
 @end

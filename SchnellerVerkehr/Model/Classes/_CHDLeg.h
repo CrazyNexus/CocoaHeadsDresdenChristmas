@@ -77,9 +77,9 @@ extern const struct CHDLegFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSOrderedSet *stops;
+@property (nonatomic, strong) NSSet *stops;
 
-- (NSMutableOrderedSet*)stopsSet;
+- (NSMutableSet*)stopsSet;
 
 
 
@@ -96,8 +96,8 @@ extern const struct CHDLegFetchedProperties {
 
 @interface _CHDLeg (CoreDataGeneratedAccessors)
 
-- (void)addStops:(NSOrderedSet*)value_;
-- (void)removeStops:(NSOrderedSet*)value_;
+- (void)addStops:(NSSet*)value_;
+- (void)removeStops:(NSSet*)value_;
 - (void)addStopsObject:(CHDStop*)value_;
 - (void)removeStopsObject:(CHDStop*)value_;
 
@@ -130,8 +130,8 @@ extern const struct CHDLegFetchedProperties {
 
 
 
-- (NSMutableOrderedSet*)primitiveStops;
-- (void)setPrimitiveStops:(NSMutableOrderedSet*)value;
+- (NSMutableSet*)primitiveStops;
+- (void)setPrimitiveStops:(NSMutableSet*)value;
 
 
 

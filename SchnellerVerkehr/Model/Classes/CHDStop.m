@@ -10,11 +10,15 @@
 @implementation CHDStop
 
 - (instancetype)initWithStation:(CHDStation *)station {
-    self = [super init];
+    self = [CHDStop MR_createEntity];
     if (self) {
         self.station = station;
     }
     return self;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@ - %@: %@", self.arrivalDate, self.departureDate, self.station];
 }
 
 @end

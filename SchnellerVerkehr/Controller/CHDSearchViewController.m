@@ -79,7 +79,38 @@
         [cell setupFromTrip:trip];
     }];
 
-    [self startLocationService];
+//    [self startLocationService];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+
+    [CHDStation findByName  :@"Hub"
+                completion  : ^(NSArray *stations) {
+                    DDLogInfo(@"station %@", stations);
+                    self.startStation = [stations firstObject];
+                }];
+
+    [CHDStation findByName  :@"Alb"
+                completion  : ^(NSArray *stations) {
+                    DDLogInfo(@"station %@", stations);
+                    self.destinationStation = [stations firstObject];
+                }];
+
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [CHDTrip    findTripWithOrigin  :self.startStation
+                    destination         :self.destinationStation
+                    calcNumberOfTrips   :2
+                    completion          : ^(NSArray *trips) {
+                        if (trips) {
+                            DDLogInfo(@"trips: %@", trips);
+                            self.datasourceManager.sectionsDatasource = @[[trips copy]];
+                        }
+                    }];
+    });
+
 }
 
 #pragma mark - Table View Delegate
@@ -89,7 +120,6 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     UITableViewCell *cell = [self.datasourceManager tableView:tableView cellForRowAtIndexPath:indexPath];
     cell.contentView.bounds = CGRectMake(0, 0, CGRectGetWidth(tableView.bounds), CGRectGetHeight(cell.contentView.bounds));
 
@@ -111,6 +141,7 @@
             if (self.didSelectStationBlock) {
                 self.didSelectStationBlock(station);
             }
+            self.didSelectStationBlock = nil;
             break;
         }
 
@@ -148,7 +179,7 @@
 - (void)startLocationService {
     self.locationManager                    = [[CLLocationManager alloc] init];
     self.locationManager.delegate           = self;
-    self.locationManager.desiredAccuracy    = kCLLocationAccuracyHundredMeters;
+    self.locationManager.desiredAccuracy    = kCLLocationAccuracyNearestTenMeters;
     if ([CLLocationManager locationServicesEnabled]) {
         [self.locationManager startUpdatingLocation];
         self.dateWhenLocationUpdatesStarted = [NSDate date];
@@ -159,7 +190,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-//        [alert show];
+        //        [alert show];
     }
 }
 
@@ -197,7 +228,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-//        [alert show];
+        //        [alert show];
     }
     // if no WiFi or internet is available
     if (error.code == kCLErrorLocationUnknown) {
@@ -206,7 +237,7 @@
                                                     delegate            :nil
                                                     cancelButtonTitle   :@"OK"
                                                     otherButtonTitles   :nil];
-//        [alert show];
+        //        [alert show];
     }
 }
 
@@ -216,7 +247,6 @@
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:currentLocation completionHandler: ^(NSArray *placemarks, NSError *error) {
         CLPlacemark *aPlacemark = [placemarks objectAtIndex:0];
-        //        self.addressLabel.text = [NSString stringWithFormat:@"%@, %@ %@", aPlacemark.name, aPlacemark.postalCode, aPlacemark.locality];
         self.startTextField.placeholder = [NSString stringWithFormat:@"%@, %@", aPlacemark.name, aPlacemark.locality];
         self.startTextField.leftViewMode = UITextFieldViewModeAlways;
         self.startTextField.leftView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"geolocation"]];
@@ -238,9 +268,7 @@
         else {
             weakSelf.destinationStation = station;
         }
-        textField.text = station.name;
-
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        textField.text = station.fullName;
     };
 }
 
@@ -268,7 +296,6 @@
     if (self.startStation != nil
         && self.destinationStation != nil) {
         [CHDTrip findTripWithOrigin:self.startStation destination:self.destinationStation calcNumberOfTrips:3 completion: ^(NSArray *trips) {
-            NSLog(@"trips: %@", trips);
             if (trips) {
                 self.datasourceManager.sectionsDatasource = @[[trips copy]];
             }
@@ -304,7 +331,7 @@
                 newContact.location = placemark.location;
             }
             else {
-                DDLogError(@"Goocoding error: %@", [error localizedDescription]);
+                DDLogError(@"Geocoding error: %@", [error localizedDescription]);
             }
         }];
     }

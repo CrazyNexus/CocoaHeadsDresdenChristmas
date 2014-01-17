@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13B42" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CarType" representedClassName="CHDCarType" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="cars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Leg" inverseName="carType" inverseEntity="Leg" syncable="YES"/>
+        <relationship name="legs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Leg" inverseName="carType" inverseEntity="Leg" syncable="YES"/>
     </entity>
     <entity name="City" representedClassName="CHDCity" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -18,12 +18,12 @@
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lineNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="carType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarType" inverseName="cars" inverseEntity="CarType" syncable="YES"/>
-        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Stop" inverseName="leg" inverseEntity="Stop" syncable="YES"/>
+        <relationship name="carType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CarType" inverseName="legs" inverseEntity="CarType" syncable="YES"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Stop" inverseName="leg" inverseEntity="Stop" syncable="YES"/>
         <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Trip" inverseName="legs" inverseEntity="Trip" syncable="YES"/>
     </entity>
     <entity name="Station" representedClassName="CHDStation" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -33,13 +33,14 @@
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StationType" inverseName="stations" inverseEntity="StationType" syncable="YES"/>
     </entity>
     <entity name="StationType" representedClassName="CHDStationType" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="searchType" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="stations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Station" inverseName="type" inverseEntity="Station" syncable="YES"/>
     </entity>
     <entity name="Stop" representedClassName="CHDStop" syncable="YES">
         <attribute name="arrivalDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="departureDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Integer 16" minValueString="0" defaultValueString="0" syncable="YES"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Leg" inverseName="stops" inverseEntity="Leg" syncable="YES"/>
         <relationship name="station" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Station" inverseName="stop" inverseEntity="Station" syncable="YES"/>
     </entity>
@@ -49,13 +50,13 @@
         <relationship name="legs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Leg" inverseName="trip" inverseEntity="Leg" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CarType" positionX="-4088" positionY="-1962" width="128" height="88"/>
-        <element name="City" positionX="-4653" positionY="-1873" width="128" height="73"/>
-        <element name="Favorite" positionX="-4754" positionY="-2358" width="128" height="88"/>
-        <element name="Leg" positionX="-4286" positionY="-1998" width="128" height="133"/>
-        <element name="Station" positionX="-4538" positionY="-2140" width="128" height="163"/>
-        <element name="StationType" positionX="-4833" positionY="-2034" width="128" height="88"/>
-        <element name="Stop" positionX="-4347" positionY="-2142" width="128" height="103"/>
-        <element name="Trip" positionX="-4293" positionY="-1807" width="128" height="88"/>
+        <element name="CarType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="City" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Favorite" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Leg" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Station" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="StationType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Stop" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Trip" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

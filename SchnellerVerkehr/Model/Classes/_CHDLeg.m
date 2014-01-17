@@ -79,10 +79,10 @@ const struct CHDLegFetchedProperties CHDLegFetchedProperties = {
 @dynamic stops;
 
 	
-- (NSMutableOrderedSet*)stopsSet {
+- (NSMutableSet*)stopsSet {
 	[self willAccessValueForKey:@"stops"];
   
-	NSMutableOrderedSet *result = (NSMutableOrderedSet*)[self mutableOrderedSetValueForKey:@"stops"];
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"stops"];
   
 	[self didAccessValueForKey:@"stops"];
 	return result;

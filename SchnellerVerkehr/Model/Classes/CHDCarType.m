@@ -25,14 +25,15 @@
                                 @"SeilBahn":@8,
                                 @"Schiff":@9,
                                 @"RufBus":@10,
-                                @"Unknown":@11
+                                @"Unknown":@11,
+                                @"Walk":@97
                                 };
 
-        for (NSString *key in types.allKeys) {
+        [types enumerateKeysAndObjectsUsingBlock: ^(id key, id obj, BOOL *stop) {
             CHDCarType *carType = [CHDCarType MR_createEntity];
             carType.name    = key;
-            carType.id      = types[key];
-        }
+            carType.id      = obj;
+        }];
     }
 }
 
@@ -41,6 +42,7 @@
 }
 
 + (instancetype)typeByID:(NSNumber *)typeID {
+    DDLogInfo(@"find cartype by id: %@", typeID);
     return [self MR_findFirstByAttribute:@"id" withValue:typeID];
 }
 

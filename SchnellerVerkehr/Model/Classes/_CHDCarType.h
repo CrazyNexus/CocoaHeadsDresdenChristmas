@@ -10,7 +10,7 @@ extern const struct CHDCarTypeAttributes {
 } CHDCarTypeAttributes;
 
 extern const struct CHDCarTypeRelationships {
-	__unsafe_unretained NSString *cars;
+	__unsafe_unretained NSString *legs;
 } CHDCarTypeRelationships;
 
 extern const struct CHDCarTypeFetchedProperties {
@@ -58,9 +58,9 @@ extern const struct CHDCarTypeFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSSet *cars;
+@property (nonatomic, strong) NSSet *legs;
 
-- (NSMutableSet*)carsSet;
+- (NSMutableSet*)legsSet;
 
 
 
@@ -70,10 +70,10 @@ extern const struct CHDCarTypeFetchedProperties {
 
 @interface _CHDCarType (CoreDataGeneratedAccessors)
 
-- (void)addCars:(NSSet*)value_;
-- (void)removeCars:(NSSet*)value_;
-- (void)addCarsObject:(CHDLeg*)value_;
-- (void)removeCarsObject:(CHDLeg*)value_;
+- (void)addLegs:(NSSet*)value_;
+- (void)removeLegs:(NSSet*)value_;
+- (void)addLegsObject:(CHDLeg*)value_;
+- (void)removeLegsObject:(CHDLeg*)value_;
 
 @end
 
@@ -96,8 +96,8 @@ extern const struct CHDCarTypeFetchedProperties {
 
 
 
-- (NSMutableSet*)primitiveCars;
-- (void)setPrimitiveCars:(NSMutableSet*)value;
+- (NSMutableSet*)primitiveLegs;
+- (void)setPrimitiveLegs:(NSMutableSet*)value;
 
 
 @end
