@@ -53,7 +53,7 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
      subscribeNext: ^(NSString *name) {
          [CHDStation findByName:name completion: ^(NSArray *stops) {
              //weakSelf.datasourceManager.sectionsDatasource = @[[stops copy]];
-             weakSelf.datasourceManager.sectionsDatasource = @[[stops copy], _contactItems, _favoritItems];
+             weakSelf.datasourceManager.data = @[[stops copy], _contactItems, _favoritItems];
          }];
      }];
     
@@ -109,7 +109,6 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
 }
 
 -(void)tableView:(UITableView *)tableView changeImageInMenuCellAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (indexPath.row == 0) {
         CHDMenueCell    *cell;
         cell = (CHDMenueCell *)[tableView cellForRowAtIndexPath:indexPath];
@@ -160,7 +159,7 @@ static NSString *kFavoritFile = @"CHDFavorits.plist";
             // get the stops for current location and show in table
             [CHDStation findByLatitude:location.coordinate.latitude longitude:location.coordinate.longitude completion: ^(NSArray *stops) {
                 //self.datasourceManager.sectionsDatasource = @[[stops copy]];
-                self.datasourceManager.sectionsDatasource = @[[stops copy], _contactItems, _favoritItems];
+                self.datasourceManager.data = @[[stops copy], _contactItems, _favoritItems];
             }];
         }
     }
