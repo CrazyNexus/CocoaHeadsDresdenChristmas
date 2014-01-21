@@ -13,12 +13,14 @@ typedef void (^CHDDataSourceManagerCellSetupBlock)(id cell, id data, NSIndexPath
 
 @interface CHDDatasourceManager : NSObject
 
-@property (nonatomic, strong) NSArray *sectionsDatasource;
+@property (nonatomic, strong) NSArray   *data;
+@property (nonatomic, assign) BOOL      shouldAutoReloadOnDatasourceChange;
 
 + (instancetype)managerForTableView:(UITableView *)tableView;
 + (instancetype)managerForCollectionView:(UICollectionView *)collectionView;
 
 - (void)registerNib:(UINib *)nib forCellReuseIdentifier:(NSString *)reuseIdentifier forDataObject:(Class)classType setupBlock:(CHDDataSourceManagerCellSetupBlock)setupBlock;
+- (void)registerClass:(Class)cellClass forCellReuseIdentifier:(NSString *)reuseIdentifier forDataObject:(Class)classType setupBlock:(CHDDataSourceManagerCellSetupBlock)setupBlock;
 - (void)registerCellReuseIdentifier:(NSString *)reuseIdentifier forDataObject:(Class)classType setupBlock:(CHDDataSourceManagerCellSetupBlock)setupBlock;
 
 - (id)dataForIndexPath:(NSIndexPath *)indexPath;
