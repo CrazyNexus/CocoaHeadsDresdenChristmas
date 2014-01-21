@@ -31,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    RAC(self.searchButton, enabled) = [RACSignal combineLatest:@[RACObserve(self, startStation), RACObserve(self, startStation)] reduce: ^id (CHDStation *startStation, CHDStation *destinationStation) {
+    RAC(self.searchButton, enabled) = [RACSignal combineLatest:@[RACObserve(self, startStation), RACObserve(self, destinationStation)] reduce: ^id (CHDStation *startStation, CHDStation *destinationStation) {
         return @((startStation != nil) && (destinationStation != nil));
     }];
 }
